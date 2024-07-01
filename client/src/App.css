@@ -1,0 +1,56 @@
+
+.title{
+  font-weight: 300;
+  z-index: 10;
+  color: #F3E9D5;
+  margin-left: 10px;
+}
+
+.hero-background{
+  position: absolute;
+  height: 350px;
+  width:100%;
+  background-color: #739474;
+  /* margin-top: -21px; */
+  z-index: 1;
+}
+
+.hero-img{
+  /* position: relative; */
+  position: absolute;
+  z-index: 10;
+  height: 180%;
+  right: -10%;
+  top: -55%;
+}
+
+.hero-circle{
+  /* position: relative; */
+  position: absolute;
+  z-index: 5;
+  height: 400px;
+  width: 400px;
+  border-radius: 50%;
+  right: -10%;
+  top: 10%;
+  background-color: #F3E9D5;
+}
+
+.all-items-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  
+}
+
+.main-products-container{
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+}
+
+/*
+TODO: add in media queries for the sizing of the hero stuff and the position 
+ */
