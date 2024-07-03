@@ -51,6 +51,20 @@
   margin-top: 30px;
 }
 
+.add-product-image{
+  width: 70%;
+}
+
+.choice-box:hover{
+  background-color: red;
+}
+
+.admin-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /*
 TODO: add in media queries for the sizing of the hero stuff and the position 
  */
