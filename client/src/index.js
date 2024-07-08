@@ -3,11 +3,26 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Auth0Provider } from '@auth0/auth0-react'
+import config from './config.json'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const providerConfig = {
+  domain: config.domain,
+  clientId: config.clientId,
+  // onRedirectCallback,
+  authorizationParams: {
+    redirect_uri: 'http://localhost:3000/admin',
+    ...(config.audience ? { audience: config.audience } : null),
+  },
+};
+
 root.render(
   <React.StrictMode>
-    <App />
+    <Auth0Provider {...providerConfig} >
+      <App />  
+    </Auth0Provider>
   </React.StrictMode>
 );
 

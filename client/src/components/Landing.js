@@ -2,6 +2,7 @@ import couch from '../assets/couch.png';
 import Nav from './Nav'
 
 export const Landing = () => {
+
     return(
         <div>
             <Nav />

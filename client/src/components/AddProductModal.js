@@ -165,6 +165,7 @@ export const AddProductModal = ({open, setOpen}) => {
                             id="primary-colors"
                             multiple
                             value={productColor}
+                            // TODO: see about setting a max num of colors
                             onChange={handleColorChange}
                             input={ <OutlinedInput label="Tag"/>}
                             renderValue={(selected) => selected.join(', ')}
