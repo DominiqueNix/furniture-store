@@ -1,0 +1,36 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./client
+
+    steps:
+      
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '20.x'
+      
+    - run: npm ci
+
+    - name: Create config file
+      run: npm run config
+
+    - name: Build React App
+      run: npm run build
+      env: 
+        DOMAIN: ${{ secrets.AUTH_DOMAIN }}  
+        CLIENT_ID: ${{ secrets.AUTH_CLIENT_ID}} 
+        AUDIENCE: ${{ secrets.AUTH_AUDIENCE }} 
