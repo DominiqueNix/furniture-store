@@ -20,3 +20,7 @@ jobs:
         cache: maven
     - name: Build with Maven
       run:  mvn -B package --file server/pom.xml
+      env: 
+        MONGODB_USER: ${{ secrets.server-build.MONGODB_USER }}
+        MONGODB_CLUSTER: ${{ secrets.server-build.MONGODB_CLUSTER }}
+        MONGODB_PASSWORD: ${{ secrets.server-build.MONGODB_PASSWORD }}
