@@ -21,6 +21,7 @@ jobs:
     - name: Build with Maven
       run:  mvn -B package --file server/pom.xml
       env: 
-        MONGODB_USER: ${{ secrets.MONGODB_USER }}
-        MONGODB_CLUSTER: ${{ secrets.MONGODB_CLUSTER }}
-        MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
+        MONGO_USER: ${{ secrets.MONGO_USER }}
+        MONGO_CLUSTER: ${{ secrets.MONGO_CLUSTER }}
+        MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+        MONGO_DATABASE: ${{ secrets.MONGO_DATABASE }}
