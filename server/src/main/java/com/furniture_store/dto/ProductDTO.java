@@ -1,4 +1,4 @@
-package com.furniture_store.Model;
+package com.furniture_store.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ProductDTO {
+    private String id;
+    // The type of the furniture (ex. sofa, bed frame, table)
     private String type;
     // An optional subtype of furniture(ex. love seat, side table)
     private String subType;
@@ -34,5 +36,21 @@ public class ProductDTO {
     // The number of this item in stock
     private int stock;
     // Optional. Additional properties that are specific to certain items.
-    private Properties properties;
+    // private PropertiesDTO properties;
+    // Optional. For items with drawers
+    private int numOfDrawers;
+    // Optional. For dining room tables
+    private int numOfLeaves;
+    // Optional. For bed frames (ex. 'queen', 'king')
+    private String size;
+    // Optional. For bed frame with storage
+    private boolean hasStorage;
+    // Optional. For adjustable beds
+    private boolean adjustable;
+    // Optional. For items that come in a set (ex.  chairs, end tables)
+    private int numInSet;
+    // Optional. For modular couches
+    private int numOfPieces;
+    // Optional. If set the item will show as discounted with the set price.
+    private int discountPrice;
 }

@@ -1,4 +1,4 @@
-package com.furniture_store.Model;
+package com.furniture_store.entity;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Document("products")
 public class Product {
     // Id generated bt mongoDb
@@ -35,6 +36,22 @@ public class Product {
     private String material;
     // The number of this item in stock
     private int stock;
-    // Optional. Additional properties that are specific to certain items.
-    private Properties properties;
+    // // Optional. Additional properties that are specific to certain items.
+    // private Properties properties;
+    // Optional. For items with drawers
+    private int numOfDrawers;
+    // Optional. For dining room tables
+    private int numOfLeaves;
+    // Optional. For bed frames (ex. 'queen', 'king')
+    private String size;
+    // Optional. For bed frame with storage
+    private boolean hasStorage;
+    // Optional. For adjustable beds
+    private boolean adjustable;
+    // Optional. For items that come in a set (ex.  chairs, end tables)
+    private int numInSet;
+    // Optional. For modular couches
+    private int numOfPieces;
+    // Optional. If set the item will show as discounted with the set price.
+    private int discountPrice;
 }
