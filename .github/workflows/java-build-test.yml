@@ -18,12 +18,10 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
-      run:  mvn -B package --file server/pom.xml
+    - name: Build and Test with Maven
+      run:  mvn -B test --file server/pom.xml
       env: 
         MONGO_USER: ${{ secrets.MONGO_USER }}
         MONGO_CLUSTER: ${{ secrets.MONGO_CLUSTER }}
         MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
         MONGO_DATABASE: ${{ secrets.MONGO_DATABASE }}
-    - name: Run tests with Maven
-      run: mvn -B test --file server/pom.xml
