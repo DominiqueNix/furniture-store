@@ -106,5 +106,12 @@ public class ProductServiceTests {
         assertThrows(NotFoundException.class, () ->  productService.getOneProduct("123"));
     }
 
+    @Test
+    void deleteProduct_shouldThrowExceptionIfProductNotFound(){
+        given(productRepository.findById("123")).willReturn(null);
+
+        assertThrows(NotFoundException.class, () ->  productService.getOneProduct("123"));
+    }
+
     
 }

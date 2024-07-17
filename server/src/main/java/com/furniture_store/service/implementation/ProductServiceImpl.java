@@ -12,6 +12,7 @@ import com.furniture_store.entity.Product;
 import com.furniture_store.errorHandling.NotFoundException;
 import com.furniture_store.repository.ProductRepository;
 import com.furniture_store.service.ProductService;
+import com.mongodb.MongoException;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -69,7 +70,12 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void deleteProduct(String id) {
-        productRepository.deleteById(id);
+        try{
+          productRepository.deleteById(id);  
+        } catch (MongoException exception){
+            throw new NotFoundException(exception.getMessage());
+        }
+        
     }
     
 
