@@ -25,3 +25,5 @@ jobs:
         MONGO_CLUSTER: ${{ secrets.MONGO_CLUSTER }}
         MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
         MONGO_DATABASE: ${{ secrets.MONGO_DATABASE }}
+    - name: Test
+      run: mvn -B test --file server/pom.xml
