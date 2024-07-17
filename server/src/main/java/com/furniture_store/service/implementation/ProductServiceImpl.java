@@ -1,6 +1,7 @@
 package com.furniture_store.service.implementation;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,10 +54,17 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public ProductDTO updateProduct(ProductDTO product) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateProduct'");
-        // return productRepository.
+    public ProductDTO updateProduct(ProductDTO productDTO) {
+        try{
+          Product product = productRepository.findById(productDTO.getId()).orElse(null);  
+          Product updatedProduct = setNewProductFields(product, productDTO);
+          return convertToDTO(productRepository.save(updatedProduct));
+
+        } catch(NullPointerException exception){
+            throw new NotFoundException("Product with id '" + productDTO.getId() + "' not found");
+        }
+        
+        
     }
 
     @Override
@@ -118,6 +126,71 @@ public class ProductServiceImpl implements ProductService{
         product.setNumOfPieces(productDTO.getNumOfPieces());
         product.setDiscountPrice(productDTO.getDiscountPrice());
  
+        return product;
+     }
+
+     private Product setNewProductFields(Product product, ProductDTO productDTO){
+
+        if(Optional.ofNullable(productDTO.getType()).isPresent()){
+            product.setType(productDTO.getType());
+        }
+        if(Optional.ofNullable(productDTO.getSubType()).isPresent()){
+            product.setSubType(productDTO.getSubType());
+        }
+        if(productDTO.getPrice() != -1){
+            product.setPrice(productDTO.getPrice());
+        }
+        if(Optional.ofNullable(productDTO.getImgRef()).isPresent()){
+            product.setImgRef(productDTO.getImgRef());   
+        }
+        if(productDTO.getHeight() != -1){
+            product.setHeight(productDTO.getHeight());
+        }
+        if(productDTO.getWidth() != -1){
+            product.setWidth(productDTO.getWidth());
+        }
+        if(Optional.ofNullable(productDTO.getName()).isPresent()){
+            product.setName(productDTO.getName());
+        }
+        if(Optional.ofNullable(productDTO.getColor()).isPresent()){
+            product.setColor(productDTO.getColor());
+        }
+        if(Optional.ofNullable(productDTO.getStyle()).isPresent()){
+            product.setStyle(productDTO.getStyle());
+        }
+        if(Optional.ofNullable(productDTO.getRoom()).isPresent()){
+            product.setRoom(productDTO.getRoom());
+        }
+        if(Optional.ofNullable(productDTO.getMaterial()).isPresent()){
+            product.setMaterial(productDTO.getMaterial());
+        }
+        if(productDTO.getStock() != -1){
+            product.setStock(productDTO.getStock());
+        }
+        if(productDTO.getNumOfDrawers() != -1){
+            product.setNumOfDrawers(productDTO.getNumOfDrawers());
+        }
+        if(productDTO.getNumOfLeaves() != -1){
+            product.setNumOfLeaves(productDTO.getNumOfLeaves());
+        }
+        if(Optional.ofNullable(productDTO.getSize()).isPresent()){
+            product.setSize(productDTO.getSize());
+        }
+        if(Optional.ofNullable(productDTO.isHasStorage()).isPresent()){
+            product.setHasStorage(productDTO.isHasStorage());
+        }
+        if(Optional.ofNullable(productDTO.isAdjustable()).isPresent()){
+            product.setAdjustable(productDTO.isAdjustable());
+        }
+        if(productDTO.getNumInSet() != -1){
+            product.setNumInSet(productDTO.getNumInSet());
+        }
+        if(productDTO.getNumOfPieces() != -1){
+            product.setNumOfPieces(productDTO.getNumOfPieces());
+        }
+        if(productDTO.getDiscountPrice() != -1){
+            product.setDiscountPrice(productDTO.getDiscountPrice());
+        }
         return product;
      }
 }

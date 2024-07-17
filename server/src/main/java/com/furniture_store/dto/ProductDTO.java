@@ -16,13 +16,16 @@ public class ProductDTO {
     // An optional subtype of furniture(ex. love seat, side table)
     private String subType;
     // The price of the item
-    private double price;
+    @Builder.Default
+    private double price = -1;
     // An image url for the item. This points to an external cloud storage
     private String imgRef;
     // the height of the item
-    private int height;
+    @Builder.Default
+    private int height = -1;
     // The width of the item
-    private int width;
+    @Builder.Default
+    private int width = -1;
     //The name of the item
     private String name;
     // The main color of the item
@@ -34,13 +37,16 @@ public class ProductDTO {
     // The predominant material this item is made of
     private String material;
     // The number of this item in stock
-    private int stock;
+    @Builder.Default
+    private int stock = -1;
     // Optional. Additional properties that are specific to certain items.
     // private PropertiesDTO properties;
     // Optional. For items with drawers
-    private int numOfDrawers;
+    @Builder.Default
+    private int numOfDrawers = -1;
     // Optional. For dining room tables
-    private int numOfLeaves;
+    @Builder.Default
+    private int numOfLeaves = -1;
     // Optional. For bed frames (ex. 'queen', 'king')
     private String size;
     // Optional. For bed frame with storage
@@ -48,9 +54,12 @@ public class ProductDTO {
     // Optional. For adjustable beds
     private boolean adjustable;
     // Optional. For items that come in a set (ex.  chairs, end tables)
-    private int numInSet;
+    @Builder.Default
+    private int numInSet = -1;
     // Optional. For modular couches
-    private int numOfPieces;
+    @Builder.Default
+    private int numOfPieces = -1;
     // Optional. If set the item will show as discounted with the set price.
-    private int discountPrice;
+    @Builder.Default
+    private int discountPrice = -1;
 }
