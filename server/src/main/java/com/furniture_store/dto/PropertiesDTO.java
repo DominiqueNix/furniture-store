@@ -1,12 +1,15 @@
-package com.furniture_store.Model;
+package com.furniture_store.dto;
 
-import lombok.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
-@ToString
-public class Properties {
+@Builder
+public class PropertiesDTO {
     // Optional. For items with drawers
     private int numOfDrawers;
     // Optional. For dining room tables
