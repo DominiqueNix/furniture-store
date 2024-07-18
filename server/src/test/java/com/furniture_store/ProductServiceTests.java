@@ -6,15 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import com.furniture_store.dto.ProductDTO;
 import com.furniture_store.entity.Product;
+import com.furniture_store.enums.FurnitureEnum.Color;
 import com.furniture_store.errorHandling.NotFoundException;
 import com.furniture_store.repository.ProductRepository;
 import com.furniture_store.service.implementation.ProductServiceImpl;
@@ -28,12 +27,15 @@ public class ProductServiceTests {
     @InjectMocks
     private ProductServiceImpl productService;
 
-
     @Test
     void getAllProducts_shouldReturnAllProducts(){
-        // Test products 
-        Product product1 = new Product("123", "sofa", "modular", 1000, "test.com", 100, 400, "Modern couch", "green", "modern", "living room", "polyester", 10, 0, 0, "", false, false, 0, 5, 0);
-        Product product2 = new Product("456", "bedframe", "storage bed", 500, "test.com", 100, 400, "Cool bed frame", "brown", "modern", "bed room", "wood", 60, 0, 0, "queen", true, false, 0, 0, 0);
+        Product product1 = new Product();
+        product1.setId("123");
+        product1.setName("Modern couch");
+
+        Product product2 = new Product();
+        product2.setId("456");
+        product2.setName("Cool bed frame");
 
         // Mocking repository layer
         given(productRepository.findAll())
@@ -58,12 +60,12 @@ public class ProductServiceTests {
 
     @Test
     void getOneProduct_shouldReturnOneProduct(){
-        // Test product
-        Product product = new Product("123", "sofa", "modular", 1000, "test.com", 100, 400, "Modern couch", "green", "modern", "living room", "polyester", 10, 0, 0, null, false, false, 0, 5, 0);
-
+        Product product1 = new Product();
+        product1.setId("123");
+        product1.setName("Modern couch");
         // Mocking repository layer
         given(productRepository.findById("123"))
-        .willReturn(Optional.of(product));
+        .willReturn(Optional.of(product1));
 
         // Calling service layer
         ProductDTO returnedProduct = productService.getOneProduct("123");
@@ -82,21 +84,25 @@ public class ProductServiceTests {
     @Test
     void updateProduct_shouldReturnProductUpdated(){
        // Test product
-       Product product = new Product("123", "sofa", "modular", 1000, "test.com", 100, 400, "Modern couch", "green", "modern", "living room", "polyester", 10, 0, 0, null, false, false, 0, 5, 0);
+       Product product1 = new Product();
+        product1.setId("123");
+        product1.setName("Modern couch");
        ProductDTO userInput = new ProductDTO();
-       userInput.setId("123");
-       userInput.setColor("red");
+       userInput.setColor(Color.RED);
        userInput.setName("new product name");
-       Product updateProduct = new Product("123", "sofa", "modular", 1000, "test.com", 100, 400, "new product name", "red", "modern", "living room", "polyester", 10, 0, 0, null, false, false, 0, 5, 0);
+       Product updateProduct = new Product();
+       updateProduct.setId("123");
+       updateProduct.setColor(Color.RED);
+       updateProduct.setName("new product name");
 
        // Mock repository
-       given(productRepository.findById("123")).willReturn(Optional.of(product));
+       given(productRepository.findById("123")).willReturn(Optional.of(product1));
        given(productRepository.save(updateProduct)).willReturn(updateProduct);
 
-       ProductDTO results = productService.updateProduct(userInput);
+       ProductDTO results = productService.updateProduct("123", userInput);
 
        assertThat(results.getName()).isEqualTo("new product name");
-       assertThat(results.getColor()).isEqualTo("red");
+       assertThat(results.getColor()).isEqualTo(Color.RED);
     }
 
     @Test

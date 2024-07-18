@@ -1,5 +1,13 @@
 package com.furniture_store.dto;
 
+
+import com.furniture_store.enums.FurnitureEnum.BedSize;
+import com.furniture_store.enums.FurnitureEnum.Color;
+import com.furniture_store.enums.FurnitureEnum.FurnitureStyle;
+import com.furniture_store.enums.FurnitureEnum.FurnitureSubType;
+import com.furniture_store.enums.FurnitureEnum.FurnitureType;
+import com.furniture_store.enums.FurnitureEnum.Material;
+import com.furniture_store.enums.FurnitureEnum.Room;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,10 +19,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ProductDTO {
     private String id;
-    // The type of the furniture (ex. sofa, bed frame, table)
-    private String type;
+    // The type of furniture (ex. sofa, bed frame, dresser)
+    private FurnitureType type;
     // An optional subtype of furniture(ex. love seat, side table)
-    private String subType;
+    private FurnitureSubType subType;
     // The price of the item
     @Builder.Default
     private double price = -1;
@@ -29,13 +37,13 @@ public class ProductDTO {
     //The name of the item
     private String name;
     // The main color of the item
-    private String color;
+    private Color color;
     // The style of the furniture (ex. modern, minimal, rustic)
-    private String style;
+    private FurnitureStyle style;
     // Optional. The room this item might best suit (ex. if type="bed frame", room = "bedroom")
-    private String room;
+    private Room room;
     // The predominant material this item is made of
-    private String material;
+    private Material material;
     // The number of this item in stock
     @Builder.Default
     private int stock = -1;
@@ -48,7 +56,7 @@ public class ProductDTO {
     @Builder.Default
     private int numOfLeaves = -1;
     // Optional. For bed frames (ex. 'queen', 'king')
-    private String size;
+    private BedSize size;
     // Optional. For bed frame with storage
     private boolean hasStorage;
     // Optional. For adjustable beds
