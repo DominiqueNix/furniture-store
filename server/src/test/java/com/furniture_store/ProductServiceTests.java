@@ -84,7 +84,6 @@ public class ProductServiceTests {
        // Test product
        Product product = new Product("123", "sofa", "modular", 1000, "test.com", 100, 400, "Modern couch", "green", "modern", "living room", "polyester", 10, 0, 0, null, false, false, 0, 5, 0);
        ProductDTO userInput = new ProductDTO();
-       userInput.setId("123");
        userInput.setColor("red");
        userInput.setName("new product name");
        Product updateProduct = new Product("123", "sofa", "modular", 1000, "test.com", 100, 400, "new product name", "red", "modern", "living room", "polyester", 10, 0, 0, null, false, false, 0, 5, 0);
@@ -93,7 +92,7 @@ public class ProductServiceTests {
        given(productRepository.findById("123")).willReturn(Optional.of(product));
        given(productRepository.save(updateProduct)).willReturn(updateProduct);
 
-       ProductDTO results = productService.updateProduct(userInput);
+       ProductDTO results = productService.updateProduct("123", userInput);
 
        assertThat(results.getName()).isEqualTo("new product name");
        assertThat(results.getColor()).isEqualTo("red");

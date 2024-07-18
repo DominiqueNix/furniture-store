@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.furniture_store.dto.ProductDTO;
 import com.furniture_store.entity.Product;
@@ -14,7 +14,7 @@ import com.furniture_store.repository.ProductRepository;
 import com.furniture_store.service.ProductService;
 import com.mongodb.MongoException;
 
-@Service
+@Component
 public class ProductServiceImpl implements ProductService{
 
     @Autowired
@@ -55,14 +55,14 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public ProductDTO updateProduct(ProductDTO productDTO) {
+    public ProductDTO updateProduct(String id, ProductDTO productDTO) {
         try{
-          Product product = productRepository.findById(productDTO.getId()).orElse(null);  
+          Product product = productRepository.findById(id).orElse(null);  
           Product updatedProduct = setNewProductFields(product, productDTO);
           return convertToDTO(productRepository.save(updatedProduct));
 
         } catch(NullPointerException exception){
-            throw new NotFoundException("Product with id '" + productDTO.getId() + "' not found");
+            throw new NotFoundException("Product with id '" + id + "' not found");
         }
         
         
