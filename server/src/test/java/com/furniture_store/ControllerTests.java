@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.furniture_store.dto.ProductDTO;
+import com.furniture_store.enums.FurnitureEnum.Color;
 import com.furniture_store.service.ProductService;
 
 @RunWith(SpringRunner.class)
@@ -86,10 +87,10 @@ public class ControllerTests {
     @Test
     public void updatedProduct_returnsUpdatedProduct() throws Exception {
         ProductDTO userInput = new ProductDTO();
-        userInput.setColor("blue");
+        userInput.setColor(Color.BLUE);
         ProductDTO product = new ProductDTO();
         product.setId("1");
-        product.setColor("blue");
+        product.setColor(Color.BLUE);
 
         when(productService.updateProduct("1", userInput)).thenReturn(product);
 
@@ -99,7 +100,7 @@ public class ControllerTests {
 
         String response = result.getResponse().getContentAsString();
 
-        assertThat(response).contains("blue");
+        assertThat(response).contains("BLUE");
         assertThat(response).contains("1");
 
     }
