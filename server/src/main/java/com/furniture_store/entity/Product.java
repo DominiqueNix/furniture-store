@@ -18,7 +18,7 @@ import com.furniture_store.enums.FurnitureEnum.Room;
 public class Product {
     // Id generated bt mongoDb
     @Id
-    private String Id;
+    private String id;
     // The type of furniture (ex. sofa, bed frame, dresser)
     private FurnitureType type;
     // An optional subtype of furniture(ex. love seat, side table)
