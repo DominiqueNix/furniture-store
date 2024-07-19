@@ -13,7 +13,7 @@ export default function ItemCard(item) {
     <Card sx={{ width: 300 }}>
       <CardMedia
         sx={{ height: 300}}
-        image={one}
+        image={item.item.imgRef}
         title="green iguana"
       />
       <CardContent>
