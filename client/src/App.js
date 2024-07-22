@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AllItems } from './components/AllItems';
 import { Admin } from './components/Admin';
 import { useEffect, useState } from 'react';
+import { OneItem } from './components/OneItem';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
         <Route path="/" element={<Landing />}/>
         <Route path="/items" element={<AllItems  items={items}/>}/>
         <Route path="/admin" element={<Admin />}/>
+        <Route path="/items/:itemId" element={<OneItem />}/>
       </Routes>
     </BrowserRouter>
     
