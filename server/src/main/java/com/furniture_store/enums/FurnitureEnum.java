@@ -27,7 +27,7 @@ public class FurnitureEnum {
     }
 
     public enum Color {
-        WHITE, BLACK, TAN, BROWN, BLUE, NAVY, RED, YELLOW, ORANGE, PINK, GREEN, PURPLE
+        WHITE, BLACK, TAN, BROWN, BLUE, NAVY, RED, YELLOW, ORANGE, PINK, GREEN, PURPLE, GRAY
     }
     
 }

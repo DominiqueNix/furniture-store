@@ -1,31 +1,42 @@
+body {
+  overflow-x: hidden;
+}
 
 .title{
   font-weight: 300;
   z-index: 10;
   color: #F3E9D5;
   margin-left: 10px;
+  font-size: 2.5rem;
+}
+
+.best-sellers-title{
+  font-weight: 300;
+  z-index: 10;
+  margin-left: 10px;
 }
 
 .hero-background{
-  position: absolute;
+  /* position: absolute; */
   height: 350px;
   width:100%;
   background-color: #739474;
   /* margin-top: -21px; */
   z-index: 1;
+  margin-top: -1.6rem;
 }
 
 .hero-img{
   /* position: relative; */
   position: absolute;
   z-index: 10;
-  height: 180%;
-  right: -10%;
-  top: -55%;
+  height: 39rem;
+  right: -8rem;
+  top: -7rem;
 }
-
+/* 
 .hero-circle{
-  /* position: relative; */
+   position: relative;
   position: absolute;
   z-index: 5;
   height: 400px;
@@ -34,7 +45,18 @@
   right: -10%;
   top: 10%;
   background-color: #F3E9D5;
-}
+} */
+
+.hero-circle{
+ position: absolute;
+ z-index: 5;
+ height: 15rem;
+ width: 50rem;
+ /* border-radius: 50%; */
+ right: 0rem;
+ top: 10rem;
+ background-color: #F3E9D5;
+} 
 
 .all-items-container{
   display: flex;
@@ -65,6 +87,33 @@
   align-items: center;
 }
 
+.one-item-left-container{
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.one-item-right-container{
+  width: 50%;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.one-item-container{
+  display: flex;
+  flex-direction: row;
+  height: 90vh;
+}
+
+.one-item-image{
+  height: 400px;
+  width: 500px;
+  border-radius: 10px;
+  box-shadow: -14px 13px 24px -11px rgba(105,105,105,1);
+}
 /*
 TODO: add in media queries for the sizing of the hero stuff and the position 
  */

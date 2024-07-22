@@ -6,9 +6,12 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import one from '../assets/1.png'
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export default function ItemCard(item) {
-    console.log(item.item.image)
+
+  const navigate = useNavigate();
+
   return (
     <Card sx={{ width: 300 }}>
       <CardMedia
@@ -25,7 +28,7 @@ export default function ItemCard(item) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button size="small" onClick={() => navigate(`/items/${item.item.id}`)}>Learn More</Button>
         <Button size="small">Add to cart</Button>
       </CardActions>
     </Card>
