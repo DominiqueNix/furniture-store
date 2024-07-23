@@ -11,9 +11,9 @@ export const AllItems = ({items}) => {
             <Nav />
             <div className='main-products-container'>
                 <FilterPanel />
-                <div className='all-items-container'>
+                {/* <div className='all-items-container'>
                     {items.map((item) => (<ItemCard item={item}/>))}
-                </div>
+                </div> */}
             </div>
         </main>
     )

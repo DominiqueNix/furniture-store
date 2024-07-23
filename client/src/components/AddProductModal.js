@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Input, InputLabel, ListItemText, MenuItem, MenuPaper, OutlinedInput, Select, TextField, Typography, colors } from "@mui/material"
+import { Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Input, InputLabel, ListItemText, MenuItem, MenuPaper, OutlinedInput, Select, TextField, Typography, colors, Autocomplete } from "@mui/material"
 import { Fragment, useState } from "react"
 import { styled } from '@mui/material/styles';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -34,6 +34,32 @@ export const AddProductModal = ({open, setOpen}) => {
         'Purple'
       ]
 
+      const options = {
+        typeOptions: [
+            'Sofa', 
+            'Bedframe', 
+            'Chair', 
+            'Dresser', 
+            'Table', 
+            'Night stand', 
+            'Bookcase', 
+            'Desk'
+        ], 
+        subTypeOptions: [
+            'Accent Chair', 
+            'Dining Chair', 
+            'Office Chair', 
+            'Loveseat', 
+            'Sectional', 
+            'Modular', 
+            'Coffee Table', 
+            'Side Table', 
+            'Dining Table', 
+            'End Table', 
+            'Platform Bed'
+        ]
+      }
+
       const [productColor, setProductColor] = useState([]);
 
       const handleColorChange = (e) => {
@@ -63,7 +89,7 @@ export const AddProductModal = ({open, setOpen}) => {
             >
                 <DialogTitle>Add new product</DialogTitle>
                 <DialogContent>
-                <TextField
+                {/* <TextField
                     autoFocus
                     required
                     margin="dense"
@@ -83,6 +109,18 @@ export const AddProductModal = ({open, setOpen}) => {
                     type="text"
                     fullWidth
                     variant="standard"
+                /> */}
+                <Autocomplete 
+                    disablePortal
+                    id="type"
+                    options={options.typeOptions}
+                    renderInput={(params) => <TextField {...params} label="Furniture Type"/>}
+                />
+                <Autocomplete 
+                    disablePortal
+                    id="type"
+                    options={options.subTypeOptions}
+                    renderInput={(params) => <TextField {...params} label="Furniture Subtype"/>}
                 />
                 <TextField
                     autoFocus

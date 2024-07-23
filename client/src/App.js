@@ -11,23 +11,23 @@ function App() {
 
   const [items, setItems] = useState([]);
 
-  const fetchItems = () => {
-      fetch("http://localhost:8080/products")
-        .then(res => res.json())
-        .then(data =>{ 
-          console.log(data)
-          setItems(data)
-          })
-  }
+  // const fetchItems = () => {
+  //     fetch("http://localhost:8080/products")
+  //       .then(res => res.json())
+  //       .then(data =>{ 
+  //         console.log(data)
+  //         setItems(data)
+  //         })
+  // }
 
-  useEffect(() => {
-    fetchItems()
-  }, [])
+  // useEffect(() => {
+  //   fetchItems()
+  // }, [])
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Landing />}/>
+        <Route path="/" element={<Landing items={items.slice(0, 4)}/>}/>
         <Route path="/items" element={<AllItems  items={items}/>}/>
         <Route path="/admin" element={<Admin />}/>
         <Route path="/items/:itemId" element={<OneItem />}/>

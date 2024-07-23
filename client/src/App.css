@@ -58,6 +58,14 @@ body {
  background-color: #F3E9D5;
 } 
 
+.landing-items-container{
+  display: flex;
+  /* flex-direction: row; */
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
 .all-items-container{
   display: flex;
   flex-direction: row;

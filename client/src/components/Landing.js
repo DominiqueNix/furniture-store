@@ -1,7 +1,8 @@
 import couch from '../assets/couch.png';
+import ItemCard from './ItemCard';
 import Nav from './Nav'
 
-export const Landing = () => {
+export const Landing = ({items}) => {
     return(
         <div className='landing-page'>
             <Nav />
@@ -11,8 +12,8 @@ export const Landing = () => {
                 <h1 className="title">Make your house feel like home.</h1>
             </div>
             <h1 className='best-sellers-title'>Best Sellers</h1>
-            <div>
-
+            <div className='landing-items-container'>
+             {items.map((item) => (<ItemCard item={item}/>))}   
             </div>
         </div>
     )
