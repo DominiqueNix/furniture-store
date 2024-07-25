@@ -1,0 +1,20 @@
+.admin-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+.grid-container{
+    /* style={{height: '100%', width: '75%', display:
+        'flex', justifyContent:'center', mar}} */
+
+    height: 600px;
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+}
+.MuiDataGrid-cell{
+    /* background-color: red; */
+    
+}
