@@ -15,40 +15,40 @@ export const Admin = () => {
     const handleOpen = (setOpenType) => {
         setOpenType(true);
     };
-    const fakeItems = seedFakeItems();
+    // const fakeItems = seedFakeItems();
 
     const rows = [];
 
-    const generateRows = () => {
-      for(let i = 0; i < fakeItems.length; i++){
-        const rowToAdd = {
-          id: fakeItems[i].ID,
-          col1: fakeItems[i].ID,
-          col2: fakeItems[i].Name,
-          col3: fakeItems[i].Description,
-          col4: fakeItems[i].Type,
-          col5: fakeItems[i].Subtype,
-          col6: `$ ${fakeItems[i].Price}`,
-          col7: fakeItems[i].ImgURL,
-          col8: fakeItems[i].Dimensions,
-          col9: fakeItems[i].Color,
-          col10: fakeItems[i].Style,
-          col11: fakeItems[i].Room,
-          col12: fakeItems[i].Material,
-          col13: fakeItems[i].Stock,
-          col14: fakeItems[i]["Number of Drawers"],
-          col15: fakeItems[i].Size,
-          col16: fakeItems[i]["Has Storage"],
-          col17: fakeItems[i]["Number in Set"],
-          col18: fakeItems[i]["Number of Pieces"],
-          col19: fakeItems[i]["Discount Price"],
-        };
-        console.log(rowToAdd)
-        rows.push(rowToAdd)
-      }
-    }
+    // const generateRows = () => {
+    //   for(let i = 0; i < fakeItems.length; i++){
+    //     const rowToAdd = {
+    //       id: fakeItems[i].ID,
+    //       col1: fakeItems[i].ID,
+    //       col2: fakeItems[i].Name,
+    //       col3: fakeItems[i].Description,
+    //       col4: fakeItems[i].Type,
+    //       col5: fakeItems[i].Subtype,
+    //       col6: `$ ${fakeItems[i].Price}`,
+    //       col7: fakeItems[i].ImgURL,
+    //       col8: fakeItems[i].Dimensions,
+    //       col9: fakeItems[i].Color,
+    //       col10: fakeItems[i].Style,
+    //       col11: fakeItems[i].Room,
+    //       col12: fakeItems[i].Material,
+    //       col13: fakeItems[i].Stock,
+    //       col14: fakeItems[i]["Number of Drawers"],
+    //       col15: fakeItems[i].Size,
+    //       col16: fakeItems[i]["Has Storage"],
+    //       col17: fakeItems[i]["Number in Set"],
+    //       col18: fakeItems[i]["Number of Pieces"],
+    //       col19: fakeItems[i]["Discount Price"],
+    //     };
+    //     console.log(rowToAdd)
+    //     rows.push(rowToAdd)
+    //   }
+    // }
 
-generateRows()
+// generateRows()
       
       const columns = [
         { field: 'col1', headerName: 'ID', width: 75 },
