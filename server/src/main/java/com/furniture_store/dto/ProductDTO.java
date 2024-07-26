@@ -24,18 +24,16 @@ public class ProductDTO {
     // An optional subtype of furniture(ex. love seat, side table)
     private FurnitureSubType subType;
     // The price of the item
-    @Builder.Default
-    private double price = -1;
+    private double price;
     // An image url for the item. This points to an external cloud storage
     private String imgRef;
     // the height of the item
-    @Builder.Default
-    private int height = -1;
-    // The width of the item
-    @Builder.Default
-    private int width = -1;
+    // The dimensions of the product (ex. 48"W x 60"H x 34"D)
+    private String dimensions;
     //The name of the item
     private String name;
+    // A description of the item
+    private String description;
     // The main color of the item
     private Color color;
     // The style of the furniture (ex. modern, minimal, rustic)
@@ -45,29 +43,17 @@ public class ProductDTO {
     // The predominant material this item is made of
     private Material material;
     // The number of this item in stock
-    @Builder.Default
-    private int stock = -1;
-    // Optional. Additional properties that are specific to certain items.
-    // private PropertiesDTO properties;
+    private int stock;
     // Optional. For items with drawers
-    @Builder.Default
-    private int numOfDrawers = -1;
-    // Optional. For dining room tables
-    @Builder.Default
-    private int numOfLeaves = -1;
+    private int numOfDrawers;
     // Optional. For bed frames (ex. 'queen', 'king')
     private BedSize size;
     // Optional. For bed frame with storage
     private boolean hasStorage;
-    // Optional. For adjustable beds
-    private boolean adjustable;
     // Optional. For items that come in a set (ex.  chairs, end tables)
-    @Builder.Default
-    private int numInSet = -1;
+    private int numInSet;
     // Optional. For modular couches
-    @Builder.Default
-    private int numOfPieces = -1;
+    private int numOfPieces;
     // Optional. If set the item will show as discounted with the set price.
-    @Builder.Default
-    private int discountPrice = -1;
+    private int discountPrice;
 }

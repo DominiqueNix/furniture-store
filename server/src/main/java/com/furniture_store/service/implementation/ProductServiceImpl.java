@@ -87,19 +87,17 @@ public class ProductServiceImpl implements ProductService{
         productDTO.setSubType(product.getSubType());
         productDTO.setPrice(product.getPrice());
         productDTO.setImgRef(product.getImgRef());
-        productDTO.setHeight(product.getHeight());
-        productDTO.setWidth(product.getWidth());
+        productDTO.setDimensions(product.getDimensions());
         productDTO.setName(product.getName());
+        productDTO.setDescription(product.getDescription());
         productDTO.setColor(product.getColor());
         productDTO.setStyle(product.getStyle());
         productDTO.setRoom(product.getRoom());
         productDTO.setMaterial(product.getMaterial());
         productDTO.setStock(product.getStock());
         productDTO.setNumOfDrawers(product.getNumOfDrawers());
-        productDTO.setNumOfLeaves(product.getNumOfLeaves());
         productDTO.setSize(product.getSize());
         productDTO.setHasStorage(product.isHasStorage());
-        productDTO.setAdjustable(product.isAdjustable());
         productDTO.setNumInSet(product.getNumInSet());
         productDTO.setNumOfPieces(product.getNumOfPieces());
         productDTO.setDiscountPrice(product.getDiscountPrice());
@@ -115,19 +113,17 @@ public class ProductServiceImpl implements ProductService{
         product.setSubType(productDTO.getSubType());
         product.setPrice(productDTO.getPrice());
         product.setImgRef(productDTO.getImgRef());
-        product.setHeight(productDTO.getHeight());
-        product.setWidth(productDTO.getWidth());
+        product.setDimensions(productDTO.getDimensions());
         product.setName(productDTO.getName());
+        product.setDescription(productDTO.getDescription());
         product.setColor(productDTO.getColor());
         product.setStyle(productDTO.getStyle());
         product.setRoom(productDTO.getRoom());
         product.setMaterial(productDTO.getMaterial());
         product.setStock(productDTO.getStock());
         product.setNumOfDrawers(productDTO.getNumOfDrawers());
-        product.setNumOfLeaves(productDTO.getNumOfLeaves());
         product.setSize(productDTO.getSize());
         product.setHasStorage(productDTO.isHasStorage());
-        product.setAdjustable(productDTO.isAdjustable());
         product.setNumInSet(productDTO.getNumInSet());
         product.setNumOfPieces(productDTO.getNumOfPieces());
         product.setDiscountPrice(productDTO.getDiscountPrice());
@@ -143,20 +139,20 @@ public class ProductServiceImpl implements ProductService{
         if(Optional.ofNullable(productDTO.getSubType()).isPresent()){
             product.setSubType(productDTO.getSubType());
         }
-        if(productDTO.getPrice() != -1){
+        if(Optional.ofNullable(productDTO.getPrice()) != null){
             product.setPrice(productDTO.getPrice());
         }
         if(Optional.ofNullable(productDTO.getImgRef()).isPresent()){
             product.setImgRef(productDTO.getImgRef());   
         }
-        if(productDTO.getHeight() != -1){
-            product.setHeight(productDTO.getHeight());
-        }
-        if(productDTO.getWidth() != -1){
-            product.setWidth(productDTO.getWidth());
+        if(Optional.ofNullable(productDTO.getDimensions()).isPresent()){
+            product.setDimensions(productDTO.getDimensions());
         }
         if(Optional.ofNullable(productDTO.getName()).isPresent()){
             product.setName(productDTO.getName());
+        }
+        if(Optional.ofNullable(productDTO.getDescription()).isPresent()){
+            product.setDescription(productDTO.getDescription());
         }
         if(Optional.ofNullable(productDTO.getColor()).isPresent()){
             product.setColor(productDTO.getColor());
@@ -170,14 +166,11 @@ public class ProductServiceImpl implements ProductService{
         if(Optional.ofNullable(productDTO.getMaterial()).isPresent()){
             product.setMaterial(productDTO.getMaterial());
         }
-        if(productDTO.getStock() != -1){
+        if(Optional.ofNullable(productDTO.getStock()) != null){
             product.setStock(productDTO.getStock());
         }
-        if(productDTO.getNumOfDrawers() != -1){
+        if(Optional.ofNullable(productDTO.getNumOfDrawers()) != null){
             product.setNumOfDrawers(productDTO.getNumOfDrawers());
-        }
-        if(productDTO.getNumOfLeaves() != -1){
-            product.setNumOfLeaves(productDTO.getNumOfLeaves());
         }
         if(Optional.ofNullable(productDTO.getSize()).isPresent()){
             product.setSize(productDTO.getSize());
@@ -185,16 +178,13 @@ public class ProductServiceImpl implements ProductService{
         if(Optional.ofNullable(productDTO.isHasStorage()).isPresent()){
             product.setHasStorage(productDTO.isHasStorage());
         }
-        if(Optional.ofNullable(productDTO.isAdjustable()).isPresent()){
-            product.setAdjustable(productDTO.isAdjustable());
-        }
-        if(productDTO.getNumInSet() != -1){
+        if(Optional.ofNullable(productDTO.getNumInSet()) != null){
             product.setNumInSet(productDTO.getNumInSet());
         }
-        if(productDTO.getNumOfPieces() != -1){
+        if(Optional.ofNullable(productDTO.getNumOfPieces()) != null){
             product.setNumOfPieces(productDTO.getNumOfPieces());
         }
-        if(productDTO.getDiscountPrice() != -1){
+        if(Optional.ofNullable(productDTO.getDiscountPrice()) != null){
             product.setDiscountPrice(productDTO.getDiscountPrice());
         }
         return product;
