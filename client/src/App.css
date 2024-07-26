@@ -81,12 +81,6 @@ body {
   background-color: red;
 }
 
-.admin-container{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .one-item-left-container{
   width: 50%;
   display: flex;

@@ -24,7 +24,7 @@ export const FilterPanel = () => {
                 </Box>
                 <Box>
                     <Typography>Price Range</Typography>
-                    <Slider onChange={handleSliderChange} defaultValue={50} aria-label="Default" valueLabelDisplay="auto" value={value}/>
+                    <Slider onChange={handleSliderChange} defaultValue={50} valueLabelDisplay="auto" value={value}/>
                 </Box>
                
             </CardContent>

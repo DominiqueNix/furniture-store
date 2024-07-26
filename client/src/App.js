@@ -11,18 +11,18 @@ function App() {
 
   const [items, setItems] = useState([]);
 
-  const fetchItems = () => {
-      fetch("http://localhost:8080/products")
-        .then(res => res.json())
-        .then(data =>{ 
-          console.log(data)
-          setItems(data)
-          })
-  }
+  // const fetchItems = () => {
+  //     fetch("http://localhost:8080/products")
+  //       .then(res => res.json())
+  //       .then(data =>{ 
+  //         console.log(data)
+  //         setItems(data)
+  //         })
+  // }
 
-  useEffect(() => {
-    fetchItems()
-  }, [])
+  // useEffect(() => {
+  //   fetchItems()
+  // }, [])
 
   return (
     <BrowserRouter>

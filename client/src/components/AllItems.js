@@ -12,7 +12,7 @@ export const AllItems = ({items}) => {
             <div className='main-products-container'>
                 <FilterPanel />
                 <div className='all-items-container'>
-                    {items.map((item) => (<ItemCard item={item}/>))}
+                    {items.map((item, idx) => (<ItemCard key={idx} item={item}/>))}
                 </div>
             </div>
         </main>
