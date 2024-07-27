@@ -17,10 +17,21 @@ import {
   GridDeleteIcon,
 } from "@mui/x-data-grid";
 import "./admin.css";
+import { DeleteProduct } from "./DeleteProduct";
 
 export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErrorAlert}) => {
   const [openAddProduct, setOpenAddProduct] = useState(false);
   const [openUpdateProduct, setUpdateProduct] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
+
+  const handleDeleteOpen = () => {
+    setOpenDelete(true);
+  };
+
+  const handleDeleteClose = () => {
+    setOpenDelete(false);
+  };
+  const [currId, setCurrId] = useState('');
 
   const rows = [];
 
@@ -109,7 +120,7 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
 
           const api = params.api;
           const thisRow = {};
-
+          
           api
             .getAllColumns()
             .filter((c) => c.field !== "__check__" && !!c)
@@ -121,7 +132,7 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
         };
 
         return (
-          <Button variant="outlined" startIcon={<GridDeleteIcon />}>
+          <Button variant="outlined" startIcon={<GridDeleteIcon />} onClick={handleDeleteOpen}>
             Delete
           </Button>
         );
@@ -154,6 +165,7 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
       <h1>Welcome Admin User</h1>
       <div className="grid-container">
         <DataGrid
+        onRowClick={(row) => setCurrId(row.id)}
           initialState={{
             columns: {
               columnVisibilityModel: {
@@ -186,6 +198,15 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
         setErrorAlert={setErrorAlert}
         open={openAddProduct}
         setOpen={setOpenAddProduct}
+      />
+      <DeleteProduct 
+       setOpenDelete={setOpenDelete}
+       openDelete={openDelete}
+       handleDeleteClose={handleDeleteClose}
+       handleDeleteOpen={handleDeleteOpen}
+       setSuccessAlert={setSuccessAlert}
+       setErrorAlert={setErrorAlert}
+       id={currId}
       />
     </main>
   );
