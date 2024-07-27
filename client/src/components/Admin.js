@@ -34,7 +34,7 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
         col4: items[i].type,
         col5: items[i].subType,
         col6: `$ ${items[i].price}`,
-        col7: items[i].imgURL,
+        col7: items[i].imgRef,
         col8: items[i].dimensions,
         col9: items[i].color,
         col10: items[i].style,

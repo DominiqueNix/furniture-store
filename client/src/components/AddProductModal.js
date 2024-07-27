@@ -2,37 +2,29 @@ import {
   Autocomplete,
   Box,
   Button,
-  Checkbox,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-  FormControl,
-  Input,
-  InputLabel,
-  ListItemText,
-  MenuItem,
-  MenuPaper,
-  OutlinedInput,
-  Select,
   TextField,
-  Typography,
-  colors,
   Divider,
   Alert,
 } from "@mui/material";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import InputAdornment from "@mui/material/InputAdornment";
 import "./addProductModal.css";
 
-export const AddProductModal = ({open, setOpen, setSuccessAlert, setErrorAlert}) => {
+export const AddProductModal = ({open, setOpen, setSuccessAlert, setErrorAlert }) => {
   const [dimensions, setDimensions] = useState({
     height: null,
     width: null,
     depth: null,
   });
+
+  const [image, setImage] = useState("");
+  const [imageUploaded, setImageUploaded] = useState(false);
 
   const defaultNewItem = {
     name: null,
@@ -40,7 +32,7 @@ export const AddProductModal = ({open, setOpen, setSuccessAlert, setErrorAlert})
     type: null,
     subType: null,
     price: null,
-    imgUrl: null,
+    imgRef: null,
     dimensions: null,
     color: null,
     style: null,
@@ -51,18 +43,14 @@ export const AddProductModal = ({open, setOpen, setSuccessAlert, setErrorAlert})
     numOfDrawers: 0,
     size: null,
     numberInSet: 0,
-    discountPrice: 0
-  }
+    discountPrice: 0,
+  };
 
-  const [newItem, setNewItem] = useState({defaultNewItem});
+  const [newItem, setNewItem] = useState({ defaultNewItem });
 
-  const handleAddProduct = (e) => {
-    setNewItem({
-      ...newItem,
-      [dimensions]: `${dimensions.width}"W x ${dimensions.height}"H x ${dimensions.depth}"D`,
-    });
-
-    setOpen(false);
+  useEffect(() => {
+    if(imageUploaded){
+        console.log('starting fetch')
     fetch("http://localhost:8080/products", {
       method: "POST",
       headers: {
@@ -90,7 +78,43 @@ export const AddProductModal = ({open, setOpen, setSuccessAlert, setErrorAlert})
     });
 
     setNewItem(defaultNewItem);
-  };
+    }
+
+    setOpen(false);
+    setImageUploaded(false);
+    
+  }, [imageUploaded])
+
+  const onSubmit = async (e) => {
+     const imageFormData = new FormData();
+    imageFormData.append("file", image);
+    imageFormData.append("upload_preset", "lqfaqr64");
+
+    const imgRes = await fetch(
+      "https://api.cloudinary.com/v1_1/ds8hwvtsv/upload",
+      {
+        method: "POST",
+        body: imageFormData,
+      }
+    );
+
+    const imageData = await imgRes.json();
+
+    await new Promise(resolve => {
+         setNewItem({
+      ...newItem,
+      imgRef: imageData.url,
+      [dimensions]: `${dimensions.width}"W x ${dimensions.height}"H x ${dimensions.depth}"D`,
+    });
+    resolve();
+    }).then(() => {
+        console.log("uploaded")
+        console.log(imageUploaded)
+      setImageUploaded(true);  
+      console.log(imageUploaded)
+
+  }).catch(err => console.log(err))
+};
 
   const onAddProductChange = (newValue, name) => {
     setNewItem({ ...newItem, [name]: newValue });
@@ -245,7 +269,6 @@ export const AddProductModal = ({open, setOpen, setSuccessAlert, setErrorAlert})
 
           <TextField
             autoFocus
-            required
             margin="dense"
             id="name"
             name="name"
@@ -259,7 +282,6 @@ export const AddProductModal = ({open, setOpen, setSuccessAlert, setErrorAlert})
           />
           <TextField
             autoFocus
-            required
             margin="dense"
             id="description"
             name="description"
@@ -280,7 +302,6 @@ export const AddProductModal = ({open, setOpen, setSuccessAlert, setErrorAlert})
           >
             <TextField
               autoFocus
-              required
               margin="dense"
               id="price"
               name="price"
@@ -301,7 +322,6 @@ export const AddProductModal = ({open, setOpen, setSuccessAlert, setErrorAlert})
             />
             <TextField
               autoFocus
-              required
               margin="dense"
               id="stock"
               name="stock"
@@ -326,7 +346,6 @@ export const AddProductModal = ({open, setOpen, setSuccessAlert, setErrorAlert})
           >
             <TextField
               autoFocus
-              required
               margin="dense"
               id="height"
               name="height"
@@ -348,7 +367,6 @@ export const AddProductModal = ({open, setOpen, setSuccessAlert, setErrorAlert})
             X
             <TextField
               autoFocus
-              required
               margin="dense"
               id="depth"
               name="depth"
@@ -370,7 +388,6 @@ export const AddProductModal = ({open, setOpen, setSuccessAlert, setErrorAlert})
             X
             <TextField
               autoFocus
-              required
               margin="dense"
               id="width"
               name="width"
@@ -486,10 +503,13 @@ export const AddProductModal = ({open, setOpen, setSuccessAlert, setErrorAlert})
             fullWidth
             tabIndex={-1}
             startIcon={<CloudUploadIcon />}
-            sx={{ padding: "10px", marginLeft: "10px" }}
+            sx={{ padding: "10px" }}
           >
             Upload image
-            <VisuallyHiddenInput type="file" />
+            <VisuallyHiddenInput
+              type="file"
+              onChange={(e) => setImage(e.target.files[0])}
+            />
           </Button>
           <Divider sx={{ marginTop: "10px" }} />
           <Alert sx={{ marginTop: "20px" }} severity="warning">
@@ -539,7 +559,6 @@ export const AddProductModal = ({open, setOpen, setSuccessAlert, setErrorAlert})
             />
             <TextField
               autoFocus
-              required
               margin="dense"
               id="numOfDrawers"
               name="numOfDrawers"
@@ -563,7 +582,6 @@ export const AddProductModal = ({open, setOpen, setSuccessAlert, setErrorAlert})
           >
             <TextField
               autoFocus
-              required
               margin="dense"
               id="numInSet"
               name="numInSet"
@@ -579,7 +597,6 @@ export const AddProductModal = ({open, setOpen, setSuccessAlert, setErrorAlert})
             />
             <TextField
               autoFocus
-              required
               margin="dense"
               id="discountPrice"
               name="discountPrice"
@@ -602,7 +619,7 @@ export const AddProductModal = ({open, setOpen, setSuccessAlert, setErrorAlert})
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpen(false)}>Cancel</Button>
-          <Button type="submit" onClick={handleAddProduct}>
+          <Button type="submit" onClick={onSubmit}>
             Save
           </Button>
         </DialogActions>
