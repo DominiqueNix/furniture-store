@@ -2,15 +2,14 @@ import { height } from "@mui/system";
 import {  useEffect, useState } from "react";
 import "./addProductModal.css";
 import { ProductModal } from "./ProductModal";
+import { utils } from "../utils/utils";
 
 export const UpdateProduct = ({open, setOpen, setSuccessAlert, setErrorAlert, item }) => {
-    console.log(item)
-    console.log(open)
 
-  const [dimensions, setDimensions] = useState({
-    height: null,
-    width: null,
-    depth: null,
+  const [dimensionsObj, setDimensionsObj] = useState({
+    height: undefined,
+    width: undefined,
+    depth: undefined,
   });
 
   
@@ -19,7 +18,7 @@ export const UpdateProduct = ({open, setOpen, setSuccessAlert, setErrorAlert, it
 
     const matches  = item.col8.match(regex)
     
-    setDimensions({
+    setDimensionsObj({
         height: Number(matches[2]), 
         width: Number(matches[0]), 
         depth: Number(matches[1])
@@ -28,33 +27,12 @@ export const UpdateProduct = ({open, setOpen, setSuccessAlert, setErrorAlert, it
   }
   const [image, setImage] = useState("");
   const [imageUploaded, setImageUploaded] = useState(false);
-
-  const defaultNewItem = {
-    name: item.col2,
-    description: item.col3,
-    type: item.col4,
-    subType: item.col5,
-    price: item.col6,
-    imgRef: item.col7,
-    dimensions: item.col8,
-    color: item.col9,
-    style: item.col10,
-    room: item.col11,
-    material: item.col12,
-    stock: item.col13,
-    hasStorage: item.col16,
-    numOfDrawers: item.col14,
-    size: item.col15,
-    numberInSet: item.col17,
-    discountPrice: item.col19,
-  };
-
-  const [newItem, setNewItem] = useState({ defaultNewItem });
+  const [newItem, setNewItem] = useState({});
 
   useEffect(() => {
     if(imageUploaded){
     fetch(`http://localhost:8080/products/${item.col1}`, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
@@ -73,22 +51,43 @@ export const UpdateProduct = ({open, setOpen, setSuccessAlert, setErrorAlert, it
       }
     });
 
-    setDimensions({
-      height: null,
-      width: null,
-      depth: null,
+    setDimensionsObj({
+      height: undefined,
+      width: undefined,
+      depth: undefined,
     });
-
-    setNewItem(defaultNewItem);
-    }
 
     setOpen(false);
     setImageUploaded(false);
-    
-  }, [imageUploaded])
+    setImage("")
+    }
 
-  const onSubmit = async (e) => {
-        getDimensions()
+    setNewItem({ 
+      name: item.col2,
+      description: item.col3,
+      type: item.col4,
+      subType: item.col5,
+      price: Number(item.col6.replace("$", "")),
+      imgRef: item.col7,
+      dimensions: item.col8,
+      color: item.col9,
+      style: item.col10,
+      room: item.col11,
+      material: item.col12,
+      stock: item.col13,
+      hasStorage: item.col16,
+      numOfDrawers: item.col14,
+      size: item.col15,
+      numberInSet: item.col17,
+      discountPrice: item.col19,
+     })
+     if(item.col8){
+       getDimensions();
+     }
+   
+  }, [imageUploaded, item])
+
+  const onSubmit = async (e) => {    
     if(image !== ""){
      const imageFormData = new FormData();
     imageFormData.append("file", image);
@@ -107,25 +106,22 @@ export const UpdateProduct = ({open, setOpen, setSuccessAlert, setErrorAlert, it
          setNewItem({
       ...newItem,
       imgRef: imageData.url,
-      [dimensions]: `${dimensions.width}"W x ${dimensions.height}"H x ${dimensions.depth}"D`,
+      dimensions: `${dimensionsObj.width}"W x ${dimensionsObj.height}"H x ${dimensionsObj.depth}"D`,
     });
-    // if(dimensions.height &&)
     resolve();
     }).then(() => {
-        console.log("uploaded")
-        console.log(imageUploaded)
       setImageUploaded(true);  
-      console.log(imageUploaded)
 
   }).catch(err => console.log(err))
 } else {
+  setNewItem({...newItem, dimensions: `${dimensionsObj.width}"W x ${dimensionsObj.height}"H x ${dimensionsObj.depth}"D`})
     setImageUploaded(true)
 }
 };
 
 return(
     <main>
-        <ProductModal modalDefaultValues={newItem} open={open} setOpen={setOpen} onSubmit={onSubmit} image={image} setImage={setImage} newItem={newItem} setNewItem={setNewItem} dimensions={dimensions} setDimensions={setDimensions} title={"UPDATE PRODUCT"}/>
+        <ProductModal open={open} setOpen={setOpen} onSubmit={onSubmit} image={image} setImage={setImage} newItem={newItem} setNewItem={setNewItem} dimensions={dimensionsObj} setDimensions={setDimensionsObj} title={"UPDATE PRODUCT"} currItem={item}/>
     </main>
 )
 };

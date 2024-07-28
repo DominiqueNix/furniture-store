@@ -10,21 +10,18 @@ import {
     Divider,
     Alert,
   } from "@mui/material";
-  import { Fragment } from "react";
+  import { Fragment, useEffect } from "react";
   import { styled } from "@mui/material/styles";
   import CloudUploadIcon from "@mui/icons-material/CloudUpload";
   import InputAdornment from "@mui/material/InputAdornment";
   import "./addProductModal.css";
+  import { utils } from "../utils/utils";
 
-export const ProductModal = ({open, setOpen, onSubmit, setImage, newItem, setNewItem, dimensions, setDimensions, title, modalDefaultValues}) => {
+export const ProductModal = ({open, setOpen, onSubmit, setImage, newItem, setNewItem, dimensions, setDimensions, title, currItem}) => {
 
     const onAddProductChange = (newValue, name) => {
         setNewItem({ ...newItem, [name]: newValue });
       };
-
-    //   if(modalDefaultValues){
-
-    //   }
     
       const VisuallyHiddenInput = styled("input")({
         clip: "rect(0 0 0 0)",
@@ -63,6 +60,7 @@ export const ProductModal = ({open, setOpen, onSubmit, setImage, newItem, setNew
           "NightStand",
           "Bookcase",
           "Desk",
+          "Chair"
         ],
         subType: [
           "Accent Chair",
@@ -108,22 +106,13 @@ export const ProductModal = ({open, setOpen, onSubmit, setImage, newItem, setNew
           "Plastic",
           "Upholstery",
         ],
-        hasStorage: ["true", "false"],
+        hasStorage: ["TRUE", "FALSE"],
       };
       return (
         <Fragment>
           <Dialog
             open={open}
             onClose={() => setOpen(false)}
-            PaperProps={{
-              component: "form",
-              onSubmit: (event) => {
-                event.preventDefault();
-                const formData = new FormData(event.currentTarget);
-                const formJson = Object.fromEntries(formData.entries());
-                setOpen(false);
-              },
-            }}
           >
             <DialogTitle>{title}</DialogTitle>
             <DialogContent>
@@ -138,8 +127,7 @@ export const ProductModal = ({open, setOpen, onSubmit, setImage, newItem, setNew
                   disablePortal
                   id="type"
                   name="type"
-                  defaultValue={ modalDefaultValues ? modalDefaultValues.type : undefined}
-                  value={undefined}
+                  value ={currItem ? utils.enumMappings[currItem.col4] : undefined}
                   required
                   onChange={(e, newValue) =>
                     onAddProductChange(
@@ -156,7 +144,7 @@ export const ProductModal = ({open, setOpen, onSubmit, setImage, newItem, setNew
                 />
                 <Autocomplete
                   disablePortal
-                  value={undefined}
+                  value ={currItem ?  utils.enumMappings[currItem.col5] : undefined}
                   id="subType"
                   onChange={(e, newValue) =>
                     onAddProductChange(
@@ -332,7 +320,7 @@ export const ProductModal = ({open, setOpen, onSubmit, setImage, newItem, setNew
                 <Autocomplete
                   disablePortal
                   id="room"
-                  value={undefined}
+                  value ={currItem ?  utils.enumMappings[currItem.col11] : undefined}
                   onChange={(e, newValue) =>
                     onAddProductChange(
                       newValue
@@ -349,7 +337,7 @@ export const ProductModal = ({open, setOpen, onSubmit, setImage, newItem, setNew
                 <Autocomplete
                   disablePortal
                   id="style"
-                  value={undefined}
+                  value ={currItem ?  utils.enumMappings[currItem.col10] : undefined}
                   onChange={(e, newValue) =>
                     onAddProductChange(
                       newValue
@@ -375,7 +363,7 @@ export const ProductModal = ({open, setOpen, onSubmit, setImage, newItem, setNew
                 <Autocomplete
                   disablePortal
                   id="primary-color"
-                  value={undefined}
+                  value ={currItem ?  utils.enumMappings[currItem.col9] : undefined}
                   onChange={(e, newValue) =>
                     onAddProductChange(
                       newValue
@@ -394,7 +382,7 @@ export const ProductModal = ({open, setOpen, onSubmit, setImage, newItem, setNew
                 <Autocomplete
                   disablePortal
                   id="material"
-                  value={undefined}
+                  value ={currItem ?  utils.enumMappings[currItem.col12] : undefined}
                   onChange={(e, newValue) =>
                     onAddProductChange(
                       newValue
@@ -435,7 +423,7 @@ export const ProductModal = ({open, setOpen, onSubmit, setImage, newItem, setNew
               <Autocomplete
                 disablePortal
                 id="hasStorage"
-                defaultValue={"false"}
+                value={newItem.hasStorage ? "TRUE" : "FALSE"}
                 onChange={(e, newValue) =>
                   onAddProductChange(
                     newValue ? newValue.toLowerCase() : newValue,
@@ -457,7 +445,7 @@ export const ProductModal = ({open, setOpen, onSubmit, setImage, newItem, setNew
                 <Autocomplete
                   disablePortal
                   id="bedSize"
-                  value={undefined}
+                  value ={currItem ?  utils.enumMappings[currItem.col15] : undefined}
                   onChange={(e, newValue) =>
                     onAddProductChange(
                       newValue

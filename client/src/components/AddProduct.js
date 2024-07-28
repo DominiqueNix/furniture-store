@@ -3,31 +3,31 @@ import "./addProductModal.css";
 import { ProductModal } from "./ProductModal";
 
 export const AddProduct = ({open, setOpen, setSuccessAlert, setErrorAlert }) => {
-  const [dimensions, setDimensions] = useState({
-    height: null,
-    width: null,
-    depth: null,
+  const [dimensionsObj, setDimensionsObj] = useState({
+    height: undefined,
+    width: undefined,
+    depth: undefined,
   });
 
   const [image, setImage] = useState("");
   const [imageUploaded, setImageUploaded] = useState(false);
 
   const defaultNewItem = {
-    name: null,
-    description: null,
-    type: null,
-    subType: null,
-    price: null,
-    imgRef: null,
-    dimensions: null,
-    color: null,
-    style: null,
-    room: null,
-    material: null,
+    name: undefined,
+    description: undefined,
+    type: undefined,
+    subType: undefined,
+    price: undefined,
+    imgRef: undefined,
+    dimensions: undefined,
+    color: undefined,
+    style: undefined,
+    room: undefined,
+    material: undefined,
     stock: 0,
     hasStorage: false,
     numOfDrawers: 0,
-    size: null,
+    size: undefined,
     numberInSet: 0,
     discountPrice: 0,
   };
@@ -57,21 +57,22 @@ export const AddProduct = ({open, setOpen, setSuccessAlert, setErrorAlert }) => 
       }
     });
 
-    setDimensions({
-      height: null,
-      width: null,
-      depth: null,
+    setDimensionsObj({
+      height: undefined,
+      width: undefined,
+      depth: undefined,
     });
 
     setNewItem(defaultNewItem);
     }
-
+    setImage("")
     setOpen(false);
     setImageUploaded(false);
     
   }, [imageUploaded])
 
   const onSubmit = async (e) => {
+    if(image !== ""){
      const imageFormData = new FormData();
     imageFormData.append("file", image);
     imageFormData.append("upload_preset", "lqfaqr64");
@@ -90,21 +91,22 @@ export const AddProduct = ({open, setOpen, setSuccessAlert, setErrorAlert }) => 
          setNewItem({
       ...newItem,
       imgRef: imageData.url,
-      [dimensions]: `${dimensions.width}"W x ${dimensions.height}"H x ${dimensions.depth}"D`,
+      dimensions: `${dimensionsObj.width}"W x ${dimensionsObj.height}"H x ${dimensionsObj.depth}"D`,
     });
     resolve();
     }).then(() => {
-        console.log("uploaded")
-        console.log(imageUploaded)
       setImageUploaded(true);  
-      console.log(imageUploaded)
 
   }).catch(err => console.log(err))
+} else {
+  setNewItem({...newItem, dimensions: `${dimensionsObj.width}"W x ${dimensionsObj.height}"H x ${dimensionsObj.depth}"D`})
+  setImageUploaded(true)
+}
 };
 
 return(
     <main>
-        <ProductModal open={open} setOpen={setOpen} onSubmit={onSubmit} image={image} setImage={setImage} newItem={newItem} setNewItem={setNewItem} dimensions={dimensions} setDimensions={setDimensions} title={"ADD NEW PRODUCT"}/>
+        <ProductModal open={open} setOpen={setOpen} onSubmit={onSubmit} image={image} setImage={setImage} newItem={newItem} setNewItem={setNewItem} dimensions={dimensionsObj} setDimensions={setDimensionsObj} title={"ADD NEW PRODUCT"}/>
     </main>
 )
 };

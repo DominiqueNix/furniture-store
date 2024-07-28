@@ -102,7 +102,7 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
           return alert(JSON.stringify(thisRow, null, 4));
         };
 
-        return <Button variant="contained" onClick={() => setOpenUpdateProduct(true)}>Update</Button>;
+        return <Button variant="contained" onClick={() => {setOpenUpdateProduct(true)}}>Update</Button>;
       },
     },
     {
@@ -151,7 +151,7 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
   };
 
   return (
-    <main class="admin-container">
+    <main className="admin-container">
       <Nav />
       {successAlert && (
         <Alert severity="success">Successful!</Alert>
@@ -166,7 +166,7 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
               columnVisibilityModel: {
                 col3: false,
                 col5: false,
-                // col7: false,
+                col7: false,
                 col8: false,
                 col9: false,
                 col10: false,
@@ -194,14 +194,12 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
         open={openAddProduct}
         setOpen={setOpenAddProduct}
       />
-      {openUpdateProduct && 
+      {currItem && 
         <UpdateProduct 
         setSuccessAlert={setSuccessAlert}
         setErrorAlert={setErrorAlert}
         open={openUpdateProduct}
         setOpen={setOpenUpdateProduct}
-        // handleUpdateClose={handleDeleteClose}
-        // handleUpdateOpen={handleUpdateOpen}
         item={currItem.row}
         />
       }
