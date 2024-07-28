@@ -8,13 +8,13 @@ import Nav from "./Nav";
 export const OneItem = () => {
     const [item, setItem] = useState([]);
     const id = useParams();
-    console.log(id)
+    // console.log(id)
 
   const fetchItems = () => {
       fetch(`http://localhost:8080/products/${id.itemId}`)
         .then(res => res.json())
         .then(data =>{ 
-          console.log(data)
+          // console.log(data)
           setItem(data)
           })
   }
