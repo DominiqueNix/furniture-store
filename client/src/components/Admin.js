@@ -1,27 +1,21 @@
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import { Alert, Button, Typography } from "@mui/material";
+import { Alert, Button } from "@mui/material";
 import { useState } from "react";
-import { AddProductModal } from "./AddProductModal";
+import { AddProduct } from "./AddProduct";
 import Nav from "./Nav";
-import addProduct from "../assets/addProduct.png";
 import {
   DataGrid,
   GridToolbar,
-  GridRowsProp,
-  GridColDef,
-  gridTabIndexCellSelector,
-  GridFooter,
   GridFooterContainer,
   GridPagination,
   GridDeleteIcon,
 } from "@mui/x-data-grid";
 import "./admin.css";
 import { DeleteProduct } from "./DeleteProduct";
+import { UpdateProduct } from "./UpdateProduct";
 
 export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErrorAlert}) => {
   const [openAddProduct, setOpenAddProduct] = useState(false);
-  const [openUpdateProduct, setUpdateProduct] = useState(false);
+  const [openUpdateProduct, setOpenUpdateProduct] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
 
   const handleDeleteOpen = () => {
@@ -31,7 +25,8 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
   const handleDeleteClose = () => {
     setOpenDelete(false);
   };
-  const [currId, setCurrId] = useState('');
+
+  const [currItem, setCurrItem] = useState('');
 
   const rows = [];
 
@@ -107,7 +102,7 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
           return alert(JSON.stringify(thisRow, null, 4));
         };
 
-        return <Button variant="contained">Update</Button>;
+        return <Button variant="contained" onClick={() => setOpenUpdateProduct(true)}>Update</Button>;
       },
     },
     {
@@ -159,19 +154,19 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
     <main class="admin-container">
       <Nav />
       {successAlert && (
-        <Alert severity="success">This is a success Alert.</Alert>
+        <Alert severity="success">Successful!</Alert>
       )}
-      {errorAlert && <Alert severity="error">This is an error Alert.</Alert>}
+      {errorAlert && <Alert severity="error">An error occurred.</Alert>}
       <h1>Welcome Admin User</h1>
       <div className="grid-container">
         <DataGrid
-        onRowClick={(row) => setCurrId(row.id)}
+        onRowClick={(row) => setCurrItem(row)}
           initialState={{
             columns: {
               columnVisibilityModel: {
                 col3: false,
                 col5: false,
-                col7: false,
+                // col7: false,
                 col8: false,
                 col9: false,
                 col10: false,
@@ -193,12 +188,24 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
           }}
         />
       </div>
-      <AddProductModal
+      <AddProduct
         setSuccessAlert={setSuccessAlert}
         setErrorAlert={setErrorAlert}
         open={openAddProduct}
         setOpen={setOpenAddProduct}
       />
+      {openUpdateProduct && 
+        <UpdateProduct 
+        setSuccessAlert={setSuccessAlert}
+        setErrorAlert={setErrorAlert}
+        open={openUpdateProduct}
+        setOpen={setOpenUpdateProduct}
+        // handleUpdateClose={handleDeleteClose}
+        // handleUpdateOpen={handleUpdateOpen}
+        item={currItem.row}
+        />
+      }
+      
       <DeleteProduct 
        setOpenDelete={setOpenDelete}
        openDelete={openDelete}
@@ -206,7 +213,7 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
        handleDeleteOpen={handleDeleteOpen}
        setSuccessAlert={setSuccessAlert}
        setErrorAlert={setErrorAlert}
-       id={currId}
+       id={currItem.id}
       />
     </main>
   );
