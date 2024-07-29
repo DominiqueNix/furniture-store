@@ -24,7 +24,7 @@ import com.furniture_store.enums.FurnitureEnum.Color;
 import com.furniture_store.service.ProductService;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK,  classes = { FurnitureStoreApplication.class, mockSecurity.class })
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
 public class ControllerTests {
 
