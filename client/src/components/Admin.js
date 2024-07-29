@@ -1,5 +1,5 @@
 import { Alert, Button } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AddProduct } from "./AddProduct";
 import Nav from "./Nav";
 import {
@@ -12,11 +12,15 @@ import {
 import "./admin.css";
 import { DeleteProduct } from "./DeleteProduct";
 import { UpdateProduct } from "./UpdateProduct";
+import { useAuth0 } from "@auth0/auth0-react";
+import configData from '../config.json'
 
 export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErrorAlert}) => {
+  const {isLoading, error, isAuthenticated, user, getAccessTokenSilently, loginWithRedirect, logout} = useAuth0();
   const [openAddProduct, setOpenAddProduct] = useState(false);
   const [openUpdateProduct, setOpenUpdateProduct] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
+  const [accessToken, setAccessToken] = useState(undefined);
 
   const handleDeleteOpen = () => {
     setOpenDelete(true);
@@ -150,6 +154,25 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
     );
   };
 
+  useEffect(() => {
+    setAccessToken("")
+    const getAccessToken = async () => {
+        try{
+            const accessToken = await getAccessTokenSilently({
+                audience: configData.audience, 
+                // scope: configData.scope
+            });
+            setAccessToken(accessToken)
+        }catch(e){
+            console.log(e)
+        }
+    }
+    getAccessToken()
+}, [getAccessTokenSilently])
+
+if(!isAuthenticated){
+  return <Button variant="contained" onClick={() => loginWithRedirect()}>Login</Button>
+} else {
   return (
     <main className="admin-container">
       <Nav />
@@ -193,6 +216,7 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
         setErrorAlert={setErrorAlert}
         open={openAddProduct}
         setOpen={setOpenAddProduct}
+        accessToken={accessToken}
       />
       {currItem && 
         <UpdateProduct 
@@ -201,6 +225,7 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
         open={openUpdateProduct}
         setOpen={setOpenUpdateProduct}
         item={currItem.row}
+        accessToken={accessToken}
         />
       }
       
@@ -212,7 +237,9 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
        setSuccessAlert={setSuccessAlert}
        setErrorAlert={setErrorAlert}
        id={currItem.id}
+       accessToken={accessToken}
       />
     </main>
   );
+}
 };

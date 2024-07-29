@@ -4,7 +4,7 @@ import "./addProductModal.css";
 import { ProductModal } from "./ProductModal";
 import { utils } from "../utils/utils";
 
-export const UpdateProduct = ({open, setOpen, setSuccessAlert, setErrorAlert, item }) => {
+export const UpdateProduct = ({open, setOpen, setSuccessAlert, setErrorAlert, item, accessToken }) => {
 
   const [dimensionsObj, setDimensionsObj] = useState({
     height: undefined,
@@ -31,11 +31,12 @@ export const UpdateProduct = ({open, setOpen, setSuccessAlert, setErrorAlert, it
 
   useEffect(() => {
     if(imageUploaded){
-    fetch(`http://localhost:8080/products/${item.col1}`, {
+    fetch(`http://localhost:8080/products/admin/${item.col1}`, {
       method: "PUT",
-      headers: {
+      headers:  new Headers({
+        Authorization: "Bearer " + accessToken,
         "Content-Type": "application/json",
-      },
+    }),
       body: JSON.stringify(newItem),
     }).then((res) => {
       if (res.status === 200) {

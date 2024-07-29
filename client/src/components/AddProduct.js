@@ -2,7 +2,7 @@ import {  useEffect, useState } from "react";
 import "./addProductModal.css";
 import { ProductModal } from "./ProductModal";
 
-export const AddProduct = ({open, setOpen, setSuccessAlert, setErrorAlert }) => {
+export const AddProduct = ({open, setOpen, setSuccessAlert, setErrorAlert, accessToken }) => {
   const [dimensionsObj, setDimensionsObj] = useState({
     height: undefined,
     width: undefined,
@@ -37,11 +37,12 @@ export const AddProduct = ({open, setOpen, setSuccessAlert, setErrorAlert }) => 
   useEffect(() => {
     if(imageUploaded){
         console.log('starting fetch')
-    fetch("http://localhost:8080/products", {
+    fetch("http://localhost:8080/products/admin", {
       method: "POST",
-      headers: {
+      headers:  new Headers({
+        Authorization: "Bearer " + accessToken,
         "Content-Type": "application/json",
-      },
+    }),
       body: JSON.stringify(newItem),
     }).then((res) => {
       if (res.status === 200) {
