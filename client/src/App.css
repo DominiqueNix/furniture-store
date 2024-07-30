@@ -108,6 +108,8 @@ body {
   border-radius: 10px;
   box-shadow: -14px 13px 24px -11px rgba(105,105,105,1);
 }
-/*
-TODO: add in media queries for the sizing of the hero stuff and the position 
- */
+
+.css-9l5vo-MuiCollapse-wrapperInner{
+  display: flex;
+  flex-direction: column;
+}

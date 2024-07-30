@@ -9,6 +9,7 @@ import { OneItem } from "./components/OneItem";
 
 function App() {
   const [items, setItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([])
   const [successAlert, setSuccessAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
 
@@ -16,8 +17,8 @@ function App() {
     fetch("http://localhost:8080/products")
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
         setItems(data);
+        setFilteredItems(data)
       });
   };
 
@@ -29,7 +30,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/items" element={<AllItems items={items} />} />
+        <Route path="/items" element={<AllItems items={items} filteredItems={filteredItems} setFilteredItems={setFilteredItems} />} />
         <Route
           path="/admin"
           element={
