@@ -1,18 +1,17 @@
-import { fakeData } from '../fakeData/fakeItems';
 import { FilterPanel } from './FilterPannel';
 import ItemCard from './ItemCard';
 import Nav from './Nav';
 
-export const AllItems = ({items}) => {
+export const AllItems = ({items, filteredItems, setFilteredItems}) => {
 
-    if(items) {
+    if(filteredItems) {
     return (
         <main>     
             <Nav />
-            <div className='main-products-container'>
-                <FilterPanel />
+            <div>
+                <FilterPanel filteredItems={filteredItems} setFilteredItems={setFilteredItems} items={items}/>
                 <div className='all-items-container'>
-                    {items.map((item, idx) => (<ItemCard key={idx} item={item}/>))}
+                    {filteredItems.map((item, idx) => (<ItemCard key={idx} item={item}/>))}
                 </div>
             </div>
         </main>

@@ -34,80 +34,6 @@ export const ProductModal = ({open, setOpen, onSubmit, setImage, newItem, setNew
         whiteSpace: "nowrap",
         width: 1,
       });
-    
-      const options = {
-        color: [
-          "White",
-          "Black",
-          "Gray",
-          "Tan",
-          "Brown",
-          "Blue",
-          "Navy",
-          "Red",
-          "Yellow",
-          "Orange",
-          "Pink",
-          "Green",
-          "Purple",
-          "Clear",
-        ],
-        type: [
-          "Sofa",
-          "Bedframe",
-          "Dresser",
-          "Table",
-          "NightStand",
-          "Bookcase",
-          "Desk",
-          "Chair"
-        ],
-        subType: [
-          "Accent Chair",
-          "Dining Chair",
-          "Office Chair",
-          "Loveseat",
-          "Sectional",
-          "Modular",
-          "Coffee Table",
-          "Side Table",
-          "Dining Table",
-          "End Table",
-          "Platform Bed",
-        ],
-        bedSize: ["Twin", "Full", "Queen", "King", "California King"],
-        style: [
-          "Modern",
-          "Minimal",
-          "Rustic",
-          "Contemporary",
-          "Industrial",
-          "Mid Century Modern",
-          "Traditional",
-          "Scandinavian",
-          "Bohemian",
-        ],
-        room: [
-          "Living Room",
-          "Bedroom",
-          "Dining Room",
-          "Kitchen",
-          "Home Office",
-          "Entryway",
-          "Bathroom",
-          "Patio",
-        ],
-        material: [
-          "Wood",
-          "Fabric",
-          "Metal",
-          "Leather",
-          "Glass",
-          "Plastic",
-          "Upholstery",
-        ],
-        hasStorage: ["TRUE", "FALSE"],
-      };
       return (
         <Fragment>
           <Dialog
@@ -137,7 +63,7 @@ export const ProductModal = ({open, setOpen, onSubmit, setImage, newItem, setNew
                       "type"
                     )
                   }
-                  options={options.type}
+                  options={utils.options.type}
                   fullWidth
                   sx={{ padding: "10px" }}
                   renderInput={(params) => <TextField {...params} label="Type" />}
@@ -155,7 +81,7 @@ export const ProductModal = ({open, setOpen, onSubmit, setImage, newItem, setNew
                     )
                   }
                   fullWidth
-                  options={options.subType}
+                  options={utils.options.subType}
                   sx={{ padding: "10px" }}
                   renderInput={(params) => (
                     <TextField {...params} label="Subtype" />
@@ -329,7 +255,7 @@ export const ProductModal = ({open, setOpen, onSubmit, setImage, newItem, setNew
                       "room"
                     )
                   }
-                  options={options.room}
+                  options={utils.options.room}
                   fullWidth
                   sx={{ padding: "10px" }}
                   renderInput={(params) => <TextField {...params} label="Room" />}
@@ -346,7 +272,7 @@ export const ProductModal = ({open, setOpen, onSubmit, setImage, newItem, setNew
                       "style"
                     )
                   }
-                  options={options.style}
+                  options={utils.options.style}
                   fullWidth
                   sx={{ padding: "10px" }}
                   renderInput={(params) => <TextField {...params} label="Style" />}
@@ -372,7 +298,7 @@ export const ProductModal = ({open, setOpen, onSubmit, setImage, newItem, setNew
                       "color"
                     )
                   }
-                  options={options.color}
+                  options={utils.options.color}
                   fullWidth
                   sx={{ padding: "10px" }}
                   renderInput={(params) => (
@@ -391,7 +317,7 @@ export const ProductModal = ({open, setOpen, onSubmit, setImage, newItem, setNew
                       "material"
                     )
                   }
-                  options={options.material}
+                  options={utils.options.material}
                   fullWidth
                   sx={{ padding: "10px" }}
                   renderInput={(params) => (
@@ -430,7 +356,7 @@ export const ProductModal = ({open, setOpen, onSubmit, setImage, newItem, setNew
                     "hasStorage"
                   )
                 }
-                options={options.hasStorage}
+                options={utils.options.hasStorage}
                 fullWidth
                 sx={{ padding: "10px" }}
                 renderInput={(params) => <TextField {...params} label="Storage" />}
@@ -454,7 +380,7 @@ export const ProductModal = ({open, setOpen, onSubmit, setImage, newItem, setNew
                       "size"
                     )
                   }
-                  options={options.bedSize}
+                  options={utils.options.bedSize}
                   fullWidth
                   sx={{ padding: "10px" }}
                   renderInput={(params) => (
