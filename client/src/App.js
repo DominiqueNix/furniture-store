@@ -6,12 +6,14 @@ import { AllItems } from "./components/AllItems";
 import { Admin } from "./components/Admin";
 import { useEffect, useState } from "react";
 import { OneItem } from "./components/OneItem";
+import { Cart } from "./components/Cart";
 
 function App() {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([])
   const [successAlert, setSuccessAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
+  const [cartItemTotal, setCartItemTotal] = useState(0);
 
   const fetchItems = () => {
     fetch("http://localhost:8080/products")
@@ -30,7 +32,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/items" element={<AllItems items={items} filteredItems={filteredItems} setFilteredItems={setFilteredItems} />} />
+        <Route path="/items" element={<AllItems cartItemTotal={cartItemTotal} setCartItemTotal={setCartItemTotal} items={items} filteredItems={filteredItems} setFilteredItems={setFilteredItems}/>} />
         <Route
           path="/admin"
           element={
@@ -43,7 +45,8 @@ function App() {
             />
           }
         />
-        <Route path="/items/:itemId" element={<OneItem />} />
+        <Route path="/items/:itemId" element={<OneItem setCartItemTotal={setCartItemTotal} />} />
+        <Route path="/cart" element={<Cart setCartItemTotal={setCartItemTotal}/>}/>
       </Routes>
     </BrowserRouter>
   );

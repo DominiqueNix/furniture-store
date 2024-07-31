@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useEffect} from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -8,28 +8,43 @@ import Typography from '@mui/material/Typography';
 import one from '../assets/1.png'
 import { Navigate, useNavigate } from 'react-router-dom';
 
-export default function ItemCard(item) {
+export const ItemCard = ({item, setCartItemTotal, cartItemTotal}) => {
+  // console.log(setCartItemTotal)
+  // console.log(cartItemTotal)
+  // console.log(item)
 
   const navigate = useNavigate();
+
+  const addCartItemToStorage = () => {
+    let existsingItems = JSON.parse(localStorage.getItem("items"))
+    if(existsingItems === null) {
+      existsingItems = []
+    }
+
+    existsingItems.push(item)
+    localStorage.setItem("items", JSON.stringify(existsingItems))
+    setCartItemTotal((total) => total + 1)
+  }
+
 
   return (
     <Card sx={{ width: 300 }}>
       <CardMedia
         sx={{ height: 300}}
-        image={item.item.imgRef}
-        title="green iguana"
+        image={item.imgRef}
+        title={item.name}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {item.item.name}
+          {item.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          ${item.item.price}
+          ${item.price}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={() => navigate(`/items/${item.item.id}`)}>Learn More</Button>
-        <Button size="small">Add to cart</Button>
+        <Button size="small" onClick={() => navigate(`/items/${item.id}`)}>Learn More</Button>
+        <Button size="small" onClick={addCartItemToStorage}>Add to cart</Button>
       </CardActions>
     </Card>
   );
