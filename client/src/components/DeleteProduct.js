@@ -7,12 +7,15 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 
-export const DeleteProduct = ({setOpenDelete, openDelete, handleDeleteClose, handleDeleteOpen, id, setSuccessAlert, setErrorAlert}) => {
+export const DeleteProduct = ({setOpenDelete, openDelete, handleDeleteClose, handleDeleteOpen, id, setSuccessAlert, setErrorAlert, accessToken}) => {
 
     const handleDeleteProduct = (currId) => {
         handleDeleteClose()
-        fetch(`http://localhost:8080/products/${currId}`, {
-          method: "DELETE"
+        fetch(`http://localhost:8080/products/admin/${currId}`, {
+          method: "DELETE", 
+          headers:  new Headers({
+            Authorization: "Bearer " + accessToken
+        }),
         }).then(res => {
             if (res.status === 200) {
             setSuccessAlert(true);

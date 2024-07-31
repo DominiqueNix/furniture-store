@@ -33,19 +33,19 @@ public class ProductController {
    }
    
    /* Auth Protected Route */
-   @PostMapping("")
+   @PostMapping("/admin")
     void addNewProduct(@RequestBody ProductDTO product){
        productService.saveNewProduct(product);
    }
 
    /* Auth Protected Route */
-   @PutMapping("/{id}")
+   @PutMapping("/admin/{id}")
    public ProductDTO updateProduct(@PathVariable String id, @RequestBody ProductDTO productDTO) {
        return productService.updateProduct(id, productDTO);
    }
 
    /* Auth Protected Route */
-   @DeleteMapping("/{id}")
+   @DeleteMapping("/admin/{id}")
    public void deleteProduct(@PathVariable String id){
     productService.deleteProduct(id);
    }
