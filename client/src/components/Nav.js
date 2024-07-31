@@ -80,7 +80,7 @@ const Search = styled('div')(({ theme }) => ({
 
   
 
-function Nav({cartItemTotal}) {
+function Nav({cartItemTotal, authPlaceHolder}) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
@@ -99,7 +99,6 @@ function Nav({cartItemTotal}) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
   return (
     <AppBar position="static">
       <Container maxWidth="xl" sx={{backgroundColor: "white"}}>
@@ -192,22 +191,16 @@ function Nav({cartItemTotal}) {
               </Button>
             ))}
           </Box>
-          <Search sx={{width:'50%'}}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
-          <Box sx={{ flexGrow: 0, marginLeft: '30px'}}>
+        {!authPlaceHolder &&
+        <Box sx={{ flexGrow: 0, marginLeft: '30px'}}>
               <IconButton onClick={() => navigate(`/cart`)} sx={{ p: 0 }}>
                 <Badge color={cartItemTotal ? "primary" : ""} badgeContent={cartItemTotal ? cartItemTotal : ""}>
                   <ShoppingCartOutlinedIcon sx={{color: '#182137'}}/>
                 </Badge>
               </IconButton>
           </Box>
+        }
+          
         </Toolbar>
       </Container>
     </AppBar>

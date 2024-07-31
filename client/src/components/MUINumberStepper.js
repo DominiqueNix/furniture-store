@@ -1,3 +1,10 @@
+/**
+ * This component is from the material UI for the customized Number Input 
+ * https://mui.com/base-ui/react-number-input/
+ * 
+ * A few adjustments were made to neet the needs of this project.
+ */
+
 import * as React from 'react';
 import { Unstable_NumberInput as BaseNumberInput } from '@mui/base/Unstable_NumberInput';
 import { styled } from '@mui/system';

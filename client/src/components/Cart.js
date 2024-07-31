@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardContent, CardMedia, IconButton, Paper, Typography } from "@mui/material";
+import { Alert, AlertTitle, Box, Button, Card, CardContent, CardHeader, CardMedia, IconButton, Paper, TextField, Typography } from "@mui/material";
 import {
     Unstable_NumberInput as BaseNumberInput,
     numberInputClasses,
@@ -14,8 +14,16 @@ export const Cart = ({setCartItemTotal, cartItemTotal}) => {
 
     const [cartItems, setCartItems] = useState([]);
     const [itemDeleted, setItemDeleted] = useState(false);
+    const [totalPayment, setTotalPayment] = useState(0);
 
     const navigate = useNavigate();
+
+    const getTotalPayment = () => {
+        let count = 0;
+        cartItems.forEach(item => count = count + item.price)
+        console.log(count)
+        setTotalPayment(count)
+    }
 
     useEffect(() => {
         let items = JSON.parse(localStorage.getItem("items"))
@@ -47,6 +55,7 @@ export const Cart = ({setCartItemTotal, cartItemTotal}) => {
             setCartItems(cartItemsData)
         }
         setItemDeleted(false)
+        getTotalPayment()
        
     }, [itemDeleted])
 
@@ -59,12 +68,12 @@ export const Cart = ({setCartItemTotal, cartItemTotal}) => {
     }
 
     const handleQuantityChange = (e, newValue, itemId) => {
-
         setCartItems((prev) => {
            return prev.map(item => (
                 item.id === itemId ? {...item, quantity: newValue, total: item.price * newValue}: item
            ))
         })
+        // getTotalPayment()
     }
     if(cartItems.length){
         return(
@@ -108,7 +117,47 @@ export const Cart = ({setCartItemTotal, cartItemTotal}) => {
                            </Button>
                         </Box>
                     </Card>
-                ))}  
+                    ))}  
+                </div>
+                <div className="payment-container">
+                    <Card sx={{height: '75%', width: '100%'}} elevation={6}>
+                        <CardContent>
+                            <Alert severity="warning" sx={{marginBottom: '20px'}}>
+                                <AlertTitle>Please Read</AlertTitle>
+                                Do not use real credit card information. This checkout was made for demo purposes only.
+                            </Alert>
+                            <Typography sx={{marginBottom: '30px'}} variant="h5">Pay with card</Typography>
+                            <Typography>Card Information</Typography>
+                            <TextField 
+                                // sx={{margin: '10px 0'}} 
+                                placeholder="1234 1234 1234 1234" 
+                                // label="Card Number"
+                                fullWidth
+                            />
+                            <Box sx={{display:'flex', marginBottom: "20px"}}>
+                                <TextField 
+                                    // sx={{margin: '10px 0'}} 
+                                    placeholder="MM/YY" 
+                                    // label="Expire Date"
+                                    fullWidth
+                                />
+                                <TextField 
+                                    fullWidth
+                                    placeholder="CVC"
+                                />
+                            </Box>
+                            <Typography>Cardholder Name</Typography>
+                            <TextField sx={{marginBottom: "20px"}} fullWidth placeholder="Firstname Lastname"/>
+
+                            <Typography>Zipcode</Typography>
+                            <TextField sx={{marginBottom: "20px"}} fullWidth placeholder="12345"/>
+
+                            <Typography>Payment Total</Typography>
+                            <Typography>{totalPayment}</Typography>
+
+                            <Button fullWidth variant="contained">Pay</Button>
+                        </CardContent>
+                    </Card>
                 </div>
             </div>
             </main>
