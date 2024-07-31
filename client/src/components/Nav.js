@@ -14,6 +14,8 @@ import AdbIcon from '@mui/icons-material/Adb';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import { Badge } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 
 const pages = [
@@ -76,10 +78,13 @@ const Search = styled('div')(({ theme }) => ({
     },
   }));
 
-function Nav() {
+  
+
+function Nav({cartItemTotal}) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const navigate = useNavigate();
+  
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -103,7 +108,7 @@ function Nav() {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="#"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -197,8 +202,10 @@ function Nav() {
             />
           </Search>
           <Box sx={{ flexGrow: 0, marginLeft: '30px'}}>
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <ShoppingCartOutlinedIcon sx={{color: '#182137'}}/>
+              <IconButton onClick={() => navigate(`/cart`)} sx={{ p: 0 }}>
+                <Badge color={cartItemTotal ? "primary" : ""} badgeContent={cartItemTotal ? cartItemTotal : ""}>
+                  <ShoppingCartOutlinedIcon sx={{color: '#182137'}}/>
+                </Badge>
               </IconButton>
           </Box>
         </Toolbar>

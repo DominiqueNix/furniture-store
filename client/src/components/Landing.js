@@ -1,10 +1,10 @@
 import couch from '../assets/couch.png';
 import Nav from './Nav'
 
-export const Landing = () => {
+export const Landing = ({cartItemTotal}) => {
     return(
         <div className='landing-page'>
-            <Nav />
+            <Nav cartItemTotal={cartItemTotal}/>
             <div className="hero-background">
                 <img src={couch} className="hero-img"/>
                 <div className='hero-circle'></div>
