@@ -152,7 +152,7 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
 
   return (
     <main className="admin-container">
-      <Nav />
+      <Nav authPlaceHolder={true}/>
       {successAlert && (
         <Alert severity="success">Successful!</Alert>
       )}

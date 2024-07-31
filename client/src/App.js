@@ -31,7 +31,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Landing />} />
+        <Route path="/" element={<Landing cartItemTotal={cartItemTotal} />} />
         <Route path="/items" element={<AllItems cartItemTotal={cartItemTotal} setCartItemTotal={setCartItemTotal} items={items} filteredItems={filteredItems} setFilteredItems={setFilteredItems}/>} />
         <Route
           path="/admin"
@@ -45,8 +45,8 @@ function App() {
             />
           }
         />
-        <Route path="/items/:itemId" element={<OneItem setCartItemTotal={setCartItemTotal} />} />
-        <Route path="/cart" element={<Cart setCartItemTotal={setCartItemTotal}/>}/>
+        <Route path="/items/:itemId" element={<OneItem cartItemTotal={cartItemTotal} setCartItemTotal={setCartItemTotal} />} />
+        <Route path="/cart" element={<Cart cartItemTotal={cartItemTotal} setCartItemTotal={setCartItemTotal}/>}/>
       </Routes>
     </BrowserRouter>
   );
