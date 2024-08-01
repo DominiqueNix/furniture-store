@@ -84,7 +84,7 @@ export const Cart = ({setItemAddedToCart, itemAddedToCart}) => {
     if(cartItems.length){
         return(
             <main>
-                <Nav itemAddedToCart={itemAddedToCart}/>
+                <Nav itemAddedToCart={itemAddedToCart} itemDeleted={itemDeleted}/>
             <div className="cart-page-container">
                 <div className="cart-items">
                   {cartItems.map(item => (

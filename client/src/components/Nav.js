@@ -80,7 +80,7 @@ const Search = styled('div')(({ theme }) => ({
 
   
 
-function Nav({authPlaceHolder, itemAddedToCart}) {
+function Nav({authPlaceHolder, itemAddedToCart, itemDeleted}) {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [cartItemTotal, setCartItemTotal] = useState(0);
@@ -112,7 +112,7 @@ function Nav({authPlaceHolder, itemAddedToCart}) {
 
     setCartItemTotal(totalItem)
 
-  }, [itemAddedToCart])
+  }, [itemAddedToCart, itemDeleted])
   return (
     <AppBar position="static">
       <Container maxWidth="xl" sx={{backgroundColor: "white"}}>
