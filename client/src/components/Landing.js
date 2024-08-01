@@ -2,10 +2,10 @@ import { Slide } from '@mui/material';
 import couch from '../assets/couch.png';
 import Nav from './Nav'
 
-export const Landing = ({cartItemTotal}) => {
+export const Landing = () => {
     return(
         <div className='landing-page'>
-            <Nav cartItemTotal={cartItemTotal}/>
+            <Nav />
             <div className="hero-background">
                     <img src={couch} className="hero-img"/>
                     <div className='hero-circle'></div>   

@@ -13,7 +13,7 @@ function App() {
   const [filteredItems, setFilteredItems] = useState([])
   const [successAlert, setSuccessAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
-  const [cartItemTotal, setCartItemTotal] = useState(0);
+  const [itemAddedToCart, setItemAddedToCart] = useState(false)
 
   const fetchItems = () => {
     fetch("http://localhost:8080/products")
@@ -31,8 +31,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Landing cartItemTotal={cartItemTotal} />} />
-        <Route path="/items" element={<AllItems cartItemTotal={cartItemTotal} setCartItemTotal={setCartItemTotal} items={items} filteredItems={filteredItems} setFilteredItems={setFilteredItems}/>} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/items" element={<AllItems items={items} filteredItems={filteredItems} setFilteredItems={setFilteredItems} setItemAddedToCart={setItemAddedToCart} itemAddedToCart={itemAddedToCart}/>} />
         <Route
           path="/admin"
           element={
@@ -45,8 +45,8 @@ function App() {
             />
           }
         />
-        <Route path="/items/:itemId" element={<OneItem cartItemTotal={cartItemTotal} setCartItemTotal={setCartItemTotal} />} />
-        <Route path="/cart" element={<Cart cartItemTotal={cartItemTotal} setCartItemTotal={setCartItemTotal}/>}/>
+        <Route path="/items/:itemId" element={<OneItem setItemAddedToCart={setItemAddedToCart} itemAddedToCart={itemAddedToCart}/>} />
+        <Route path="/cart" element={<Cart setItemAddedToCart={setItemAddedToCart} itemAddedToCart={itemAddedToCart}/>}/>
       </Routes>
     </BrowserRouter>
   );

@@ -8,10 +8,7 @@ import Typography from '@mui/material/Typography';
 import one from '../assets/1.png'
 import { Navigate, useNavigate } from 'react-router-dom';
 
-export const ItemCard = ({item, setCartItemTotal, cartItemTotal}) => {
-  // console.log(setCartItemTotal)
-  // console.log(cartItemTotal)
-  // console.log(item)
+export const ItemCard = ({item, setItemAddedToCart}) => {
 
   const navigate = useNavigate();
 
@@ -23,7 +20,7 @@ export const ItemCard = ({item, setCartItemTotal, cartItemTotal}) => {
 
     existsingItems.push(item)
     localStorage.setItem("items", JSON.stringify(existsingItems))
-    setCartItemTotal((total) => total + 1)
+    setItemAddedToCart((bool) => !bool)
   }
 
 

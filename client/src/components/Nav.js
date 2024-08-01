@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useEffect, useState} from 'react';
 import AppBar from '@mui/material/AppBar';
 import { styled, alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -80,9 +80,11 @@ const Search = styled('div')(({ theme }) => ({
 
   
 
-function Nav({cartItemTotal, authPlaceHolder}) {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+function Nav({authPlaceHolder, itemAddedToCart}) {
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [cartItemTotal, setCartItemTotal] = useState(0);
+
   const navigate = useNavigate();
   
   const handleOpenNavMenu = (event) => {
@@ -99,6 +101,18 @@ function Nav({cartItemTotal, authPlaceHolder}) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  useEffect(() => {
+    let items = JSON.parse(localStorage.getItem("items"))
+    let totalItem= 0;
+    
+    if(items){
+      totalItem= items.length
+    }
+
+    setCartItemTotal(totalItem)
+
+  }, [itemAddedToCart])
   return (
     <AppBar position="static">
       <Container maxWidth="xl" sx={{backgroundColor: "white"}}>

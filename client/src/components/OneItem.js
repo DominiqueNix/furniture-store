@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import Nav from "./Nav";
 import { utils } from '../utils/utils';
 
-export const OneItem = ({setCartItemTotal, cartItemTotal}) => {
+export const OneItem = ({setItemAddedToCart, itemAddedToCart}) => {
     const [item, setItem] = useState([]);
     const id = useParams();
 
@@ -31,11 +31,11 @@ export const OneItem = ({setCartItemTotal, cartItemTotal}) => {
 
     existsingItems.push(item)
     localStorage.setItem("items", JSON.stringify(existsingItems))
-    setCartItemTotal((total) => total + 1)
+    setItemAddedToCart((bool) => !bool)
   }
     return (
         <main >
-            <Nav cartItemTotal={cartItemTotal}/>
+            <Nav itemAddedToCart={itemAddedToCart}/>
             <div className="one-item-container">
                 <div className="one-item-left-container">
                     <img className="one-item-image" src={item.imgRef}/>
