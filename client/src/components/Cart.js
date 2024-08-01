@@ -10,20 +10,13 @@ import Nav from "./Nav";
 import { useNavigate } from "react-router-dom";
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export const Cart = ({setCartItemTotal, cartItemTotal}) => {
+export const Cart = ({setItemAddedToCart, itemAddedToCart}) => {
 
     const [cartItems, setCartItems] = useState([]);
     const [itemDeleted, setItemDeleted] = useState(false);
     const [totalPayment, setTotalPayment] = useState(0);
 
     const navigate = useNavigate();
-
-    const getTotalPayment = () => {
-        let count = 0;
-        cartItems.forEach(item => count = count + item.price)
-        console.log(count)
-        setTotalPayment(count)
-    }
 
     useEffect(() => {
         let items = JSON.parse(localStorage.getItem("items"))
@@ -55,30 +48,43 @@ export const Cart = ({setCartItemTotal, cartItemTotal}) => {
             setCartItems(cartItemsData)
         }
         setItemDeleted(false)
-        getTotalPayment()
-       
-    }, [itemDeleted])
+    }, [itemDeleted, itemAddedToCart])
 
     const handleDeleteItem = (itemId) => {
         let items = JSON.parse(localStorage.getItem("items"))
         let results = items.filter(item => item.id !== itemId)
         localStorage.setItem("items", JSON.stringify(results))
         setItemDeleted(true)
-        setCartItemTotal((total) => total-1)
+    }
+    const handleQuantityChange = (newValue, item, currValue) => {
+        let existsingItems = JSON.parse(localStorage.getItem("items"))
+            if(existsingItems === null) {
+            existsingItems = []
+            }
+        if(newValue > currValue){
+            existsingItems.push(item)
+            localStorage.setItem("items", JSON.stringify(existsingItems))
+            setItemAddedToCart((bool) => !bool)  
+        } else {
+         
+            for(let i = existsingItems.length-1; i >= 0; i--){
+                if(existsingItems[i].id === item.id){
+                    existsingItems.splice(i, 1);
+                    localStorage.setItem("items", JSON.stringify(existsingItems))
+                    break
+                }
+            }
+            setItemAddedToCart((bool) => !bool)  
+        }
+        
     }
 
-    const handleQuantityChange = (e, newValue, itemId) => {
-        setCartItems((prev) => {
-           return prev.map(item => (
-                item.id === itemId ? {...item, quantity: newValue, total: item.price * newValue}: item
-           ))
-        })
-        // getTotalPayment()
-    }
+
+
     if(cartItems.length){
         return(
             <main>
-                <Nav cartItemTotal={cartItemTotal}/>
+                <Nav itemAddedToCart={itemAddedToCart} itemDeleted={itemDeleted}/>
             <div className="cart-page-container">
                 <div className="cart-items">
                   {cartItems.map(item => (
@@ -98,7 +104,7 @@ export const Cart = ({setCartItemTotal, cartItemTotal}) => {
                         <Box>
                             <CardContent>
                                 <Typography sx={{textAlign: 'center'}}>Quantity</Typography>
-                                <QuantityInput aria-label="Quantity Input" min={1} max={99} defaultQuantity={item.quantity} changeQuantity={handleQuantityChange} itemId={item.id}/>
+                                <QuantityInput aria-label="Quantity Input" min={1} max={99} defaultQuantity={item.quantity} changeQuantity={(e, newValue) => handleQuantityChange(newValue, item, item.quantity)} itemId={item.id}/>
                             </CardContent>
                         </Box>
                         <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
