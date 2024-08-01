@@ -80,35 +80,6 @@ body {
 .choice-box:hover{
   background-color: red;
 }
-
-.one-item-left-container{
-  width: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.one-item-right-container{
-  width: 50%;
-  display: flex;
-  align-items: start;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.one-item-container{
-  display: flex;
-  flex-direction: row;
-  height: 90vh;
-}
-
-.one-item-image{
-  height: 400px;
-  width: 500px;
-  border-radius: 10px;
-  box-shadow: -14px 13px 24px -11px rgba(105,105,105,1);
-}
-
 .css-9l5vo-MuiCollapse-wrapperInner{
   display: flex;
   flex-direction: column;

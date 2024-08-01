@@ -1,8 +1,4 @@
-import { Alert, AlertTitle, Box, Button, Card, CardContent, CardHeader, CardMedia, IconButton, Paper, TextField, Typography } from "@mui/material";
-import {
-    Unstable_NumberInput as BaseNumberInput,
-    numberInputClasses,
-  } from '@mui/base/Unstable_NumberInput';
+import { Alert, AlertTitle, Box, Button, Card, CardContent, CardMedia, Paper, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react"
 import './cart.css';
 import QuantityInput from "./MUINumberStepper";
@@ -20,12 +16,14 @@ export const Cart = ({setItemAddedToCart, itemAddedToCart}) => {
 
     useEffect(() => {
         let items = JSON.parse(localStorage.getItem("items"))
+        let total = 0;
         if(items !== null){
              let cartItemsData = [];
 
             let seenItem = {}
             for(let i = 0; i < items.length; i++){
                 let item = items[i]
+                total += item.price
                 if(seenItem[item.id]){
 
                     seenItem[item.id].quantity = seenItem[item.id].quantity + 1;
@@ -46,6 +44,8 @@ export const Cart = ({setItemAddedToCart, itemAddedToCart}) => {
                 cartItemsData.push(seenItem[item]);
             }
             setCartItems(cartItemsData)
+            setTotalPayment(total)
+
         }
         setItemDeleted(false)
     }, [itemDeleted, itemAddedToCart])
@@ -132,7 +132,8 @@ export const Cart = ({setItemAddedToCart, itemAddedToCart}) => {
                                 <AlertTitle>Please Read</AlertTitle>
                                 Do not use real credit card information. This checkout was made for demo purposes only.
                             </Alert>
-                            <Typography sx={{marginBottom: '30px'}} variant="h5">Pay with card</Typography>
+                            <Typography sx={{marginBottom: '20px'}}  variant="h4">Payment Total: ${totalPayment.toFixed(2)}</Typography>
+                            <Typography sx={{marginBottom: '15px'}} variant="h5">Pay with card</Typography>
                             <Typography>Card Information</Typography>
                             <TextField 
                                 // sx={{margin: '10px 0'}} 
@@ -157,9 +158,6 @@ export const Cart = ({setItemAddedToCart, itemAddedToCart}) => {
 
                             <Typography>Zipcode</Typography>
                             <TextField sx={{marginBottom: "20px"}} fullWidth placeholder="12345"/>
-
-                            <Typography>Payment Total</Typography>
-                            <Typography>{totalPayment}</Typography>
 
                             <Button fullWidth variant="contained">Pay</Button>
                         </CardContent>
