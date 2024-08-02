@@ -13,7 +13,13 @@ import "./admin.css";
 import { DeleteProduct } from "./DeleteProduct";
 import { UpdateProduct } from "./UpdateProduct";
 
-export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErrorAlert}) => {
+export const Admin = ({
+  items,
+  successAlert,
+  setSuccessAlert,
+  errorAlert,
+  setErrorAlert,
+}) => {
   const [openAddProduct, setOpenAddProduct] = useState(false);
   const [openUpdateProduct, setOpenUpdateProduct] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
@@ -26,7 +32,7 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
     setOpenDelete(false);
   };
 
-  const [currItem, setCurrItem] = useState('');
+  const [currItem, setCurrItem] = useState("");
 
   const rows = [];
 
@@ -102,7 +108,16 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
           return alert(JSON.stringify(thisRow, null, 4));
         };
 
-        return <Button variant="contained" onClick={() => {setOpenUpdateProduct(true)}}>Update</Button>;
+        return (
+          <Button
+            variant="contained"
+            onClick={() => {
+              setOpenUpdateProduct(true);
+            }}
+          >
+            Update
+          </Button>
+        );
       },
     },
     {
@@ -115,7 +130,7 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
 
           const api = params.api;
           const thisRow = {};
-          
+
           api
             .getAllColumns()
             .filter((c) => c.field !== "__check__" && !!c)
@@ -127,7 +142,11 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
         };
 
         return (
-          <Button variant="outlined" startIcon={<GridDeleteIcon />} onClick={handleDeleteOpen}>
+          <Button
+            variant="outlined"
+            startIcon={<GridDeleteIcon />}
+            onClick={handleDeleteOpen}
+          >
             Delete
           </Button>
         );
@@ -152,15 +171,13 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
 
   return (
     <main className="admin-container">
-      <Nav authPlaceHolder={true}/>
-      {successAlert && (
-        <Alert severity="success">Successful!</Alert>
-      )}
+      <Nav authPlaceHolder={true} />
+      {successAlert && <Alert severity="success">Successful!</Alert>}
       {errorAlert && <Alert severity="error">An error occurred.</Alert>}
       <h1>Welcome Admin User</h1>
       <div className="grid-container">
         <DataGrid
-        onRowClick={(row) => setCurrItem(row)}
+          onRowClick={(row) => setCurrItem(row)}
           initialState={{
             columns: {
               columnVisibilityModel: {
@@ -194,24 +211,24 @@ export const Admin = ({items, successAlert, setSuccessAlert, errorAlert, setErro
         open={openAddProduct}
         setOpen={setOpenAddProduct}
       />
-      {currItem && 
-        <UpdateProduct 
+      {currItem && (
+        <UpdateProduct
+          setSuccessAlert={setSuccessAlert}
+          setErrorAlert={setErrorAlert}
+          open={openUpdateProduct}
+          setOpen={setOpenUpdateProduct}
+          item={currItem.row}
+        />
+      )}
+
+      <DeleteProduct
+        setOpenDelete={setOpenDelete}
+        openDelete={openDelete}
+        handleDeleteClose={handleDeleteClose}
+        handleDeleteOpen={handleDeleteOpen}
         setSuccessAlert={setSuccessAlert}
         setErrorAlert={setErrorAlert}
-        open={openUpdateProduct}
-        setOpen={setOpenUpdateProduct}
-        item={currItem.row}
-        />
-      }
-      
-      <DeleteProduct 
-       setOpenDelete={setOpenDelete}
-       openDelete={openDelete}
-       handleDeleteClose={handleDeleteClose}
-       handleDeleteOpen={handleDeleteOpen}
-       setSuccessAlert={setSuccessAlert}
-       setErrorAlert={setErrorAlert}
-       id={currItem.id}
+        id={currItem.id}
       />
     </main>
   );
