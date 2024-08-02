@@ -6,13 +6,14 @@ import { useParams } from "react-router-dom";
 import Nav from "./Nav";
 import { utils } from '../utils/utils';
 import './oneItem.css'
+import apiURL from '../utils/api';
 
 export const OneItem = ({setItemAddedToCart, itemAddedToCart}) => {
     const [item, setItem] = useState([]);
     const id = useParams();
 
   const fetchItems = () => {
-      fetch(`http://localhost:8080/products/${id.itemId}`)
+      fetch(`${apiURL}/products/${id.itemId}`)
         .then(res => res.json())
         .then(data =>{ 
           console.log(data)

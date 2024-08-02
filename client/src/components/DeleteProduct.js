@@ -5,13 +5,14 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import apiURL from "../utils/api";
 
 
 export const DeleteProduct = ({setOpenDelete, openDelete, handleDeleteClose, handleDeleteOpen, id, setSuccessAlert, setErrorAlert}) => {
 
     const handleDeleteProduct = (currId) => {
         handleDeleteClose()
-        fetch(`http://localhost:8080/products/${currId}`, {
+        fetch(`${apiURL}/products/${currId}`, {
           method: "DELETE"
         }).then(res => {
             if (res.status === 200) {

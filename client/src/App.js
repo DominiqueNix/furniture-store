@@ -7,6 +7,7 @@ import { Admin } from "./components/Admin";
 import { useEffect, useState } from "react";
 import { OneItem } from "./components/OneItem";
 import { Cart } from "./components/Cart";
+import apiURL from "./utils/api";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -16,7 +17,7 @@ function App() {
   const [itemAddedToCart, setItemAddedToCart] = useState(false)
 
   const fetchItems = () => {
-    fetch("http://localhost:8080/products")
+    fetch(`${apiURL}/products`)
       .then((res) => res.json())
       .then((data) => {
         setItems(data);

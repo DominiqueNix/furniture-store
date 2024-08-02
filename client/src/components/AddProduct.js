@@ -1,6 +1,7 @@
 import {  useEffect, useState } from "react";
 import "./addProductModal.css";
 import { ProductModal } from "./ProductModal";
+import apiURL from "../utils/api";
 
 export const AddProduct = ({open, setOpen, setSuccessAlert, setErrorAlert }) => {
   const [dimensionsObj, setDimensionsObj] = useState({
@@ -37,7 +38,7 @@ export const AddProduct = ({open, setOpen, setSuccessAlert, setErrorAlert }) => 
   useEffect(() => {
     if(imageUploaded){
         console.log('starting fetch')
-    fetch("http://localhost:8080/products", {
+    fetch(`${apiURL}/products`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

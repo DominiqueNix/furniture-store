@@ -3,6 +3,7 @@ import {  useEffect, useState } from "react";
 import "./addProductModal.css";
 import { ProductModal } from "./ProductModal";
 import { utils } from "../utils/utils";
+import apiURL from "../utils/api";
 
 export const UpdateProduct = ({open, setOpen, setSuccessAlert, setErrorAlert, item }) => {
 
@@ -31,7 +32,7 @@ export const UpdateProduct = ({open, setOpen, setSuccessAlert, setErrorAlert, it
 
   useEffect(() => {
     if(imageUploaded){
-    fetch(`http://localhost:8080/products/${item.col1}`, {
+    fetch(`${apiURL}/products/${item.col1}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
