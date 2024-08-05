@@ -4,7 +4,7 @@ import Nav from './Nav'
 import { OneItem } from './OneItem';
 import { ItemCard } from './ItemCard';
 
-export const Landing = ({popularItems}) => {
+export const Landing = ({popularItems, setItemAddedToCart}) => {
     return(
         <div className='landing-page'>
             <Nav />
@@ -16,7 +16,7 @@ export const Landing = ({popularItems}) => {
             <h1 className='best-sellers-title'>Best Sellers</h1>
             <div style={{display: 'flex', justifyContent: 'space-around'}}>
                 {popularItems.map((item) => (
-                    <ItemCard key={item.id} item={item}/>
+                    <ItemCard key={item.id} item={item} setItemAddedToCart={setItemAddedToCart}/>
                 ))}
             </div>
         </div>

@@ -197,9 +197,7 @@ if(!isAuthenticated){
       <Typography sx={{margin: '10px 0 20px 0'}} variant="subtitle1">Sign in to continue</Typography>
       <Button variant="contained" onClick={() => loginWithRedirect()}>Login</Button> 
       </Card>
-      
     </main>
-  
   )
 } else {
   return (
