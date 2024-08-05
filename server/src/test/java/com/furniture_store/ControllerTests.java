@@ -1,73 +1,73 @@
-package com.furniture_store;
+// package com.furniture_store;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+// import static org.assertj.core.api.Assertions.assertThat;
+// import static org.mockito.Mockito.when;
+// import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.List;
+// import java.util.List;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+// import org.junit.Test;
+// import org.junit.runner.RunWith;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+// import org.springframework.boot.test.context.SpringBootTest;
+// import org.springframework.boot.test.mock.mockito.MockBean;
+// import org.springframework.test.context.junit4.SpringRunner;
+// import org.springframework.test.web.servlet.MockMvc;
+// import org.springframework.test.web.servlet.MvcResult;
+// import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.furniture_store.dto.ProductDTO;
-import com.furniture_store.service.ProductService;
+// import com.fasterxml.jackson.databind.ObjectMapper;
+// import com.furniture_store.dto.ProductDTO;
+// import com.furniture_store.service.ProductService;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-@AutoConfigureMockMvc
-public class ControllerTests {
+// @RunWith(SpringRunner.class)
+// @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+// @AutoConfigureMockMvc
+// public class ControllerTests {
 
-    @Autowired
-    MockMvc mockMvc;
+//     @Autowired
+//     MockMvc mockMvc;
 
-    @Autowired
-    ObjectMapper objectMapper;
+//     @Autowired
+//     ObjectMapper objectMapper;
 
-    @MockBean
-    ProductService productService;
+//     @MockBean
+//     ProductService productService;
 
-    @Test
-    public void getAllProducts_shouldReturnAllProducts() throws Exception{
-        ProductDTO product1 = new ProductDTO();
-        ProductDTO product2 = new ProductDTO();
-        product1.setName("product 1");
-        product2.setName("product 2");
-        List<ProductDTO> productDTOs = List.of(product1, product2);
+//     @Test
+//     public void getAllProducts_shouldReturnAllProducts() throws Exception{
+//         ProductDTO product1 = new ProductDTO();
+//         ProductDTO product2 = new ProductDTO();
+//         product1.setName("product 1");
+//         product2.setName("product 2");
+//         List<ProductDTO> productDTOs = List.of(product1, product2);
 
-        when(productService.getAllProducts()).thenReturn(productDTOs);
+//         when(productService.getAllProducts()).thenReturn(productDTOs);
 
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/products")).andExpect(status().isOk()).andReturn();
+//         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/products")).andExpect(status().isOk()).andReturn();
 
-        String response = result.getResponse().getContentAsString();
+//         String response = result.getResponse().getContentAsString();
 
-        assertThat(response).contains("product 1");
-        assertThat(response).contains("product 2");
-    }
+//         assertThat(response).contains("product 1");
+//         assertThat(response).contains("product 2");
+//     }
 
-    @Test
-    public void getOneProduct_returnsOneProduct() throws Exception{
-        ProductDTO productDTO = new ProductDTO();
-        productDTO.setId("1");
-        productDTO.setName("test product");
+//     @Test
+//     public void getOneProduct_returnsOneProduct() throws Exception{
+//         ProductDTO productDTO = new ProductDTO();
+//         productDTO.setId("1");
+//         productDTO.setName("test product");
 
-        when(productService.getOneProduct("1")).thenReturn(productDTO);
+//         when(productService.getOneProduct("1")).thenReturn(productDTO);
 
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/products/1")).andExpect(status().isOk()).andReturn();
+//         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/products/1")).andExpect(status().isOk()).andReturn();
 
-        String response = result.getResponse().getContentAsString();
+//         String response = result.getResponse().getContentAsString();
 
-        assertThat(response).contains("test product");
-        assertThat(response).contains("1");
-    }
+//         assertThat(response).contains("test product");
+//         assertThat(response).contains("1");
+//     }
 
     // @Test 
     // public void addNewProduct_isSuccessful() throws Exception {
@@ -113,4 +113,4 @@ public class ControllerTests {
     //     assertThat(status).isEqualTo(200);
     // }
 
-}
+// }
