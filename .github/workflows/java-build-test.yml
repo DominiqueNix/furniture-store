@@ -25,3 +25,6 @@ jobs:
         MONGO_CLUSTER: ${{ secrets.MONGO_CLUSTER }}
         MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
         MONGO_DATABASE: ${{ secrets.MONGO_DATABASE }}
+        AUTH_AUDIENCE: ${{ secrets.AUTH_AUDIENCE }}
+        AUTH_ISSUER: ${{ secrets.AUTH_ISSUER }}
+
