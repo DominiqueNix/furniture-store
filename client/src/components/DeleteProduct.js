@@ -13,11 +13,16 @@ export const DeleteProduct = ({
   id,
   setSuccessAlert,
   setErrorAlert,
+  accessToken,
 }) => {
   const handleDeleteProduct = (currId) => {
     handleDeleteClose();
-    fetch(`${apiURL}/products/${currId}`, {
+    fetch(`${apiURL}/products/admin/${currId}`, {
       method: "DELETE",
+      headers:  new Headers({
+        Authorization: "Bearer " + accessToken,
+          "Content-Type": "application/json",
+      }),
     }).then((res) => {
       if (res.status === 200) {
         setSuccessAlert(true);

@@ -8,7 +8,8 @@ export const UpdateProduct = ({
   setOpen,
   setSuccessAlert,
   setErrorAlert,
-  item,
+  item, 
+  accessToken,
 }) => {
   const [dimensionsObj, setDimensionsObj] = useState({
     height: undefined,
@@ -35,11 +36,12 @@ export const UpdateProduct = ({
 
   useEffect(() => {
     if (imageUploaded) {
-      fetch(`${apiURL}/products/${item.col1}`, {
+      fetch(`${apiURL}/products/admin/${item.col1}`, {
         method: "PUT",
-        headers: {
+        headers:  new Headers({
+        Authorization: "Bearer " + accessToken,
           "Content-Type": "application/json",
-        },
+      }),
         body: JSON.stringify(newItem),
       }).then((res) => {
         if (res.status === 200) {
