@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build Docker image
-      run: docker buildx build -f ./server -t furniture-server
+      run: docker buildx build -f ./server -t furniture-server .
     - name: Run docker container
       run:  docker run --rm -t furniture-server
       env: 
