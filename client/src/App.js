@@ -35,7 +35,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Landing popularItems={items.slice(0,4)} />} />
+        <Route path="/" element={<Landing popularItems={items.slice(0,4)} setItemAddedToCart={setItemAddedToCart}/>} />
         <Route path="/items" element={<AllItems items={items} filteredItems={filteredItems} setFilteredItems={setFilteredItems} setItemAddedToCart={setItemAddedToCart} itemAddedToCart={itemAddedToCart}/>} />
         <Route
           path="/admin"

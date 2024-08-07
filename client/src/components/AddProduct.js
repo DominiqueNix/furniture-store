@@ -8,6 +8,7 @@ export const AddProduct = ({
   setOpen,
   setSuccessAlert,
   setErrorAlert,
+  accessToken
 }) => {
   const [dimensionsObj, setDimensionsObj] = useState({
     height: undefined,
@@ -41,27 +42,28 @@ export const AddProduct = ({
   const [newItem, setNewItem] = useState({ defaultNewItem });
 
   useEffect(() => {
-    if (imageUploaded) {
-      console.log("starting fetch");
-      fetch(`${apiURL}/products`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newItem),
-      }).then((res) => {
-        if (res.status === 200) {
-          setSuccessAlert(true);
-          setTimeout(() => {
-            setSuccessAlert(false);
-          }, 1000);
-        } else {
-          setErrorAlert(true);
-          setTimeout(() => {
-            setErrorAlert(false);
-          }, 1000);
-        }
-      });
+    if(imageUploaded){
+        console.log('starting fetch')
+    fetch(`${apiURL}/products/admin`, {
+      method: "POST",
+      headers:  new Headers({
+        Authorization: "Bearer " + accessToken,
+        "Content-Type": "application/json",
+    }),
+      body: JSON.stringify(newItem),
+    }).then((res) => {
+      if (res.status === 200) {
+        setSuccessAlert(true);
+        setTimeout(() => {
+          setSuccessAlert(false);
+        }, 1000);
+      } else {
+        setErrorAlert(true);
+        setTimeout(() => {
+          setErrorAlert(false);
+        }, 1000);
+      }
+    });
 
       setDimensionsObj({
         height: undefined,

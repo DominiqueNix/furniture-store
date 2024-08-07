@@ -13,7 +13,6 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Badge } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-
 const pages = [
   {
     name: 'Home',
@@ -29,7 +28,7 @@ const pages = [
   }
   ];  
 
-function Nav({authPlaceHolder, itemAddedToCart, itemDeleted}) {
+function Nav({authPlaceHolder, itemAddedToCart, itemDeleted, logout}) {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [cartItemTotal, setCartItemTotal] = useState(0);
@@ -162,6 +161,13 @@ function Nav({authPlaceHolder, itemAddedToCart, itemDeleted}) {
                 </Badge>
               </IconButton>
           </Box>
+        }
+        {authPlaceHolder &&
+        <Box sx={{ flexGrow: 0, marginLeft: '30px'}}>
+        <IconButton onClick={() => navigate(`/cart`)} sx={{ p: 0 }}>
+            <Button variant='contained' onClick={() => logout()}>Logout</Button>
+        </IconButton>
+    </Box>
         }
         </Toolbar>
       </Container>
