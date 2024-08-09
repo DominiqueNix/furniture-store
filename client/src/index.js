@@ -12,7 +12,7 @@ const providerConfig = {
   clientId: config.clientId,
   // onRedirectCallback,
   authorizationParams: {
-    redirect_uri: 'http://localhost:3000/admin',
+    redirect_uri: 'https://grand-nougat-e75839.netlify.app/admin',
     ...(config.audience ? { audience: config.audience } : null),
   },
 };
