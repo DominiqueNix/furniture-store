@@ -14,10 +14,10 @@ This is a fake furniture store web application. The backend was made using java/
 
 ## Deployment
   Note: This application is deployed in two parts. The back-end api was deployed using render and the front-end was deplyed using netlify. Users are expected to use the front-end website to interact with the application as intended.
-  <br />
+  <br/>
   #### Live Websites
   Front-End: [Furniture-Store front end website](https://grand-nougat-e75839.netlify.app)
-  <br />
+  <br/>
   Back-End: [Furniture-Store back end api]()
 
   #### Docker
@@ -70,12 +70,13 @@ This is a fake furniture store web application. The backend was made using java/
 
 ## Acknowledgements
 [Geeks for Geeks: Spring Boot – Map Entity to DTO using ModelMapper](https://www.geeksforgeeks.org/spring-boot-map-entity-to-dto-using-modelmapper/)
-<br />
+<br/>
 [LinkedIn: Project Structure Best Practices (Springboot)](https://www.linkedin.com/pulse/project-structure-best-practices-springboot-divyateja-yasoju-innyc)
 <br/>
 [GitHub: Kanban-Board](https://github.com/MultiverseLearningProducts/kanban-board)
 <br/>
 [FreeCodeCamp: How to test services, endpoints, and repositories in Spring Boot](https://www.freecodecamp.org/news/unit-testing-services-endpoints-and-repositories-in-spring-boot-4b7d9dc2b772/)
+<br/>
 [Cloudinary](https://cloudinary.com/)
 
 
