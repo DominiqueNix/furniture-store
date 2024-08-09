@@ -6,9 +6,7 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { Autocomplete, TextField } from "@mui/material";
 import { utils } from "../utils/utils";
 
-export const FilterPanel = ({ filteredItems, setFilteredItems, items }) => {
-  const [value, setValue] = useState([0, 100]);
-
+export const FilterPanel = ({ setFilteredItems, items }) => {
   const [filterOptions, setFilterOptions] = useState({
     type: "",
     material: "",
@@ -16,10 +14,6 @@ export const FilterPanel = ({ filteredItems, setFilteredItems, items }) => {
     color: "",
     room: "",
   });
-
-  const handleSliderChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
   const filterItems = (items, filterOptions) => {
     return items.filter((item) => {

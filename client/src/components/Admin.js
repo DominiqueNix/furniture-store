@@ -13,7 +13,7 @@ import "./admin.css";
 import { DeleteProduct } from "./DeleteProduct";
 import { UpdateProduct } from "./UpdateProduct";
 import { useAuth0 } from "@auth0/auth0-react";
-import configData from '../config.json'
+import configData from "../config.json";
 
 export const Admin = ({
   items,
@@ -26,20 +26,24 @@ export const Admin = ({
   const [openUpdateProduct, setOpenUpdateProduct] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [accessToken, setAccessToken] = useState(undefined);
-  const {isLoading, error, isAuthenticated, user, getAccessTokenSilently, loginWithRedirect, logout} = useAuth0();
+  const {
+    isAuthenticated,
+    getAccessTokenSilently,
+    loginWithRedirect,
+    logout,
+  } = useAuth0();
 
   const handleDeleteOpen = () => {
     setOpenDelete(true);
   };
-
   const handleDeleteClose = () => {
     setOpenDelete(false);
   };
 
   const [currItem, setCurrItem] = useState("");
-
   const rows = [];
 
+  // generate the table row columns dynamically based on the incoming data
   const generateRows = () => {
     for (let i = 0; i < items.length; i++) {
       const rowToAdd = {
@@ -95,6 +99,7 @@ export const Admin = ({
       field: "col20",
       headerName: "",
       width: 150,
+      // adding an update item button to each row
       renderCell: (params) => {
         const onClick = (e) => {
           e.stopPropagation();
@@ -128,6 +133,7 @@ export const Admin = ({
       field: "col21",
       headerName: "",
       width: 150,
+      // adding a delete item button to each row
       renderCell: (params) => {
         const onClick = (e) => {
           e.stopPropagation();
@@ -158,6 +164,7 @@ export const Admin = ({
     },
   ];
 
+  // creating a custom table foot that has an add product button
   const CustomFooter = (props) => {
     return (
       <GridFooterContainer>
@@ -174,97 +181,118 @@ export const Admin = ({
   };
 
   useEffect(() => {
-    setAccessToken("")
+    // getting auth0 access token
+    setAccessToken("");
     const getAccessToken = async () => {
-        try{
-            const accessToken = await getAccessTokenSilently({
-                audience: configData.audience, 
-                // scope: configData.scope
-            });
-            setAccessToken(accessToken)
-        }catch(e){
-            console.log(e)
-        }
-    }
-    getAccessToken()
-}, [getAccessTokenSilently])
-
-if(!isAuthenticated){
-  return (
-    <main style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '85vh'}}>
-      <Card elevation='6' sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '30px'}}>
-       <Typography variant="h5">Welcome admin user!</Typography>
-      <Typography sx={{margin: '10px 0 20px 0'}} variant="subtitle1">Sign in to continue</Typography>
-      <Button variant="contained" onClick={() => loginWithRedirect()}>Login</Button> 
-      </Card>
-    </main>
-  )
-} else {
-  return (
-    <main className="admin-container">
-      <Nav authPlaceHolder={isAuthenticated} logout={logout} />
-      {successAlert && <Alert severity="success">Successful!</Alert>}
-      {errorAlert && <Alert severity="error">An error occurred.</Alert>}
-      <h1>Welcome Admin User</h1>
-      <div className="grid-container">
-        <DataGrid
-          onRowClick={(row) => setCurrItem(row)}
-          initialState={{
-            columns: {
-              columnVisibilityModel: {
-                col3: false,
-                col5: false,
-                col7: false,
-                col8: false,
-                col9: false,
-                col10: false,
-                col11: false,
-                col12: false,
-                col14: false,
-                col15: false,
-                col16: false,
-                col17: false,
-                col18: false,
-              },
-            },
-          }}
-          rows={rows}
-          columns={columns}
-          slots={{
-            toolbar: GridToolbar,
-            footer: CustomFooter,
-          }}
-        />
-      </div>
-      <AddProduct
-        setSuccessAlert={setSuccessAlert}
-        setErrorAlert={setErrorAlert}
-        open={openAddProduct}
-        setOpen={setOpenAddProduct}
-        accessToken={accessToken}
-      />
-      {currItem && 
-        <UpdateProduct 
-        setSuccessAlert={setSuccessAlert}
-        setErrorAlert={setErrorAlert}
-        open={openUpdateProduct}
-        setOpen={setOpenUpdateProduct}
-        item={currItem.row}
-        accessToken={accessToken}
-        />
+      try {
+        const accessToken = await getAccessTokenSilently({
+          audience: configData.audience,
+        });
+        setAccessToken(accessToken);
+      } catch (e) {
+        console.log(e);
       }
-      
-      <DeleteProduct 
-       setOpenDelete={setOpenDelete}
-       openDelete={openDelete}
-       handleDeleteClose={handleDeleteClose}
-       handleDeleteOpen={handleDeleteOpen}
-       setSuccessAlert={setSuccessAlert}
-       setErrorAlert={setErrorAlert}
-       id={currItem.id}
-       accessToken={accessToken}
-      />
-    </main>
-  );
-}
+    };
+    getAccessToken();
+  }, [getAccessTokenSilently]);
+
+  if (!isAuthenticated) {
+    // create a landing page of unauthenticated admin users to sign in
+    return (
+      <main
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "85vh",
+        }}
+      >
+        <Card
+          elevation="6"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "30px",
+          }}
+        >
+          <Typography variant="h5">Welcome admin user!</Typography>
+          <Typography sx={{ margin: "10px 0 20px 0" }} variant="subtitle1">
+            Sign in to continue
+          </Typography>
+          <Button variant="contained" onClick={() => loginWithRedirect()}>
+            Login
+          </Button>
+        </Card>
+      </main>
+    );
+  } else {
+    return (
+      <main className="admin-container">
+        <Nav authPlaceHolder={isAuthenticated} logout={logout} />
+        {successAlert && <Alert severity="success">Successful!</Alert>}
+        {errorAlert && <Alert severity="error">An error occurred.</Alert>}
+        <h1>Welcome Admin User</h1>
+        <div className="grid-container">
+          <DataGrid
+            onRowClick={(row) => setCurrItem(row)}
+            initialState={{
+              columns: {
+                columnVisibilityModel: {
+                  col3: false,
+                  col5: false,
+                  col7: false,
+                  col8: false,
+                  col9: false,
+                  col10: false,
+                  col11: false,
+                  col12: false,
+                  col14: false,
+                  col15: false,
+                  col16: false,
+                  col17: false,
+                  col18: false,
+                },
+              },
+            }}
+            rows={rows}
+            columns={columns}
+            slots={{
+              toolbar: GridToolbar,
+              footer: CustomFooter,
+            }}
+          />
+        </div>
+        <AddProduct
+          setSuccessAlert={setSuccessAlert}
+          setErrorAlert={setErrorAlert}
+          open={openAddProduct}
+          setOpen={setOpenAddProduct}
+          accessToken={accessToken}
+        />
+        {currItem && (
+          <UpdateProduct
+            setSuccessAlert={setSuccessAlert}
+            setErrorAlert={setErrorAlert}
+            open={openUpdateProduct}
+            setOpen={setOpenUpdateProduct}
+            item={currItem.row}
+            accessToken={accessToken}
+          />
+        )}
+
+        <DeleteProduct
+          setOpenDelete={setOpenDelete}
+          openDelete={openDelete}
+          handleDeleteClose={handleDeleteClose}
+          handleDeleteOpen={handleDeleteOpen}
+          setSuccessAlert={setSuccessAlert}
+          setErrorAlert={setErrorAlert}
+          id={currItem.id}
+          accessToken={accessToken}
+        />
+      </main>
+    );
+  }
 };

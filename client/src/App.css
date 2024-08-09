@@ -1,3 +1,4 @@
+/* landing page */
 body {
   overflow-x: hidden;
 }
@@ -17,47 +18,32 @@ body {
 }
 
 .hero-background{
-  /* position: absolute; */
   height: 350px;
   width:100%;
   background-color: #739474;
-  /* margin-top: -21px; */
   z-index: 1;
   margin-top: -1.6rem;
 }
 
 .hero-img{
-  /* position: relative; */
   position: absolute;
   z-index: 10;
   height: 39rem;
   right: -8rem;
   top: -7rem;
 }
-/* 
-.hero-circle{
-   position: relative;
-  position: absolute;
-  z-index: 5;
-  height: 400px;
-  width: 400px;
-  border-radius: 50%;
-  right: -10%;
-  top: 10%;
-  background-color: #F3E9D5;
-} */
 
 .hero-circle{
  position: absolute;
  z-index: 5;
  height: 15rem;
  width: 50rem;
- /* border-radius: 50%; */
  right: 0rem;
  top: 10rem;
  background-color: #F3E9D5;
 } 
 
+/* All items page */
 .all-items-container{
   display: flex;
   flex-direction: row;
@@ -67,20 +53,81 @@ body {
   
 }
 
-.main-products-container{
-  display: flex;
-  flex-direction: row;
-  margin-top: 30px;
-}
-
-.add-product-image{
-  width: 70%;
-}
-
-.choice-box:hover{
-  background-color: red;
-}
 .css-9l5vo-MuiCollapse-wrapperInner{
   display: flex;
   flex-direction: column;
+}
+
+/* cart item page */
+.cart-page-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  justify-content: space-around;
+}
+
+.cart-items{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+}
+.no-items-in-cart{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 85vh;
+}
+
+.payment-container{
+  width: 600px;
+}
+
+/* admin page */
+.admin-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.grid-container{
+  height: 600px;
+  width: 75%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+/* One item page */
+.one-item-left-container{
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.one-item-right-container{
+  width: 50%;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.one-item-container{
+  display: flex;
+  flex-direction: row;
+  height: 90vh;
+}
+
+.one-item-image{
+  height: 400px;
+  width: 500px;
+  border-radius: 10px;
+  box-shadow: -14px 13px 24px -11px rgba(105,105,105,1);
+}
+
+.details-title{
+  font-weight: 400;
 }

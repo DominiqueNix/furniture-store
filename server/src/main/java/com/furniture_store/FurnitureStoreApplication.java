@@ -10,12 +10,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication
 @EnableMongoRepositories
 public class FurnitureStoreApplication {
-	public static void main(String[] args) {SpringApplication.run(FurnitureStoreApplication.class, args);}
+	public static void main(String[] args) {
+		SpringApplication.run(FurnitureStoreApplication.class, args);
+	}
+
 	@Bean
-	public WebMvcConfigurer corsConfigurer(){
+	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
 			@Override
-			public void addCorsMappings(CorsRegistry registry){
+			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
 						.allowedOrigins("*")
 						.allowedMethods("*")

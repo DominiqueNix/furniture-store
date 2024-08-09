@@ -15,16 +15,14 @@ import lombok.RequiredArgsConstructor;
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-            return http.authorizeHttpRequests((authz) -> authz
-                    .requestMatchers("/products").permitAll()
-                    .requestMatchers("/products/admin").authenticated()
-                    .anyRequest().permitAll()
-                )
+        return http.authorizeHttpRequests((authz) -> authz
+                .requestMatchers("/products").permitAll()
+                .requestMatchers("/products/admin").authenticated()
+                .anyRequest().permitAll())
                 .cors(withDefaults())
-                .oauth2ResourceServer(oauth2 -> 
-                    oauth2
-                    .jwt(withDefaults())
-                ).build();
+                .oauth2ResourceServer(oauth2 -> oauth2
+                        .jwt(withDefaults()))
+                .build();
     }
 
 }

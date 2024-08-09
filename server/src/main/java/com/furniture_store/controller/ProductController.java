@@ -11,43 +11,41 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 
-
-
 @RestController
 @RequestMapping("/products")
 public class ProductController {
-   private final ProductService productService;
+    private final ProductService productService;
 
-   ProductController(ProductService productService){
-    this.productService = productService;
-}
+    ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
-   @GetMapping("")
-    List<ProductDTO> getAllProducts(){
-       return productService.getAllProducts();
-   }
+    @GetMapping("")
+    List<ProductDTO> getAllProducts() {
+        return productService.getAllProducts();
+    }
 
-   @GetMapping("/{id}")
-   public ProductDTO getOneProduct(@PathVariable String id) {
-       return productService.getOneProduct(id);
-   }
-   
-   /* Auth Protected Route */
-   @PostMapping("/admin")
-    void addNewProduct(@RequestBody ProductDTO product){
-       productService.saveNewProduct(product);
-   }
+    @GetMapping("/{id}")
+    public ProductDTO getOneProduct(@PathVariable String id) {
+        return productService.getOneProduct(id);
+    }
 
-   /* Auth Protected Route */
-   @PutMapping("/admin/{id}")
-   public ProductDTO updateProduct(@PathVariable String id, @RequestBody ProductDTO productDTO) {
-       return productService.updateProduct(id, productDTO);
-   }
+    /* Auth Protected Route */
+    @PostMapping("/admin")
+    void addNewProduct(@RequestBody ProductDTO product) {
+        productService.saveNewProduct(product);
+    }
 
-   /* Auth Protected Route */
-   @DeleteMapping("/admin/{id}")
-   public void deleteProduct(@PathVariable String id){
-    productService.deleteProduct(id);
-   }
+    /* Auth Protected Route */
+    @PutMapping("/admin/{id}")
+    public ProductDTO updateProduct(@PathVariable String id, @RequestBody ProductDTO productDTO) {
+        return productService.updateProduct(id, productDTO);
+    }
+
+    /* Auth Protected Route */
+    @DeleteMapping("/admin/{id}")
+    public void deleteProduct(@PathVariable String id) {
+        productService.deleteProduct(id);
+    }
 
 }
