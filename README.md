@@ -7,9 +7,10 @@ This is a fake furniture store web application. The backend was made using java 
 ## Table of Contents
  - [Live Website](#live-website)
  - [User Stories](#user-stories)
+ - [Tech Stack](#tech-stack)
  - [Installation](#installation)
  - [Website Screenshots](#website-screenshots)
- - [Acknowledgements](#acnowledgements)
+ - [Acknowledgements](#acknowledgements)
 
 ## Live Website
   Note: This application is deployed in two parts. The back-end api was deployed using render and the front-end was deplyed using netlify. Users are expected to use the front-end website to interact with the application as intended.
@@ -59,5 +60,13 @@ This is a fake furniture store web application. The backend was made using java 
 <img width="989" alt="Screenshot 2024-08-09 at 2 53 52 PM" src="https://github.com/user-attachments/assets/dd12a128-5bb8-4046-9e18-5846ce6055bd">
 <img width="989" alt="Screenshot 2024-08-09 at 2 53 18 PM" src="https://github.com/user-attachments/assets/52060ed8-910a-431b-85ac-63d6117d2524">
 
-## Acknowledments
+## Acknowledgements
+[Geeks for Geeks: Spring Boot – Map Entity to DTO using ModelMapper](https://www.geeksforgeeks.org/spring-boot-map-entity-to-dto-using-modelmapper/)
+<br />
+[LinkedIn: Project Structure Best Practices (Springboot)](https://www.linkedin.com/pulse/project-structure-best-practices-springboot-divyateja-yasoju-innyc)
+<br/>
+[GitHub: Kanban-Board](https://github.com/MultiverseLearningProducts/kanban-board)
+<br/>
+[FreeCodeCamp: How to test services, endpoints, and repositories in Spring Boot](https://www.freecodecamp.org/news/unit-testing-services-endpoints-and-repositories-in-spring-boot-4b7d9dc2b772/)
+
 
