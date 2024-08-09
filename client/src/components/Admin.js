@@ -9,7 +9,6 @@ import {
   GridPagination,
   GridDeleteIcon,
 } from "@mui/x-data-grid";
-import "./admin.css";
 import { DeleteProduct } from "./DeleteProduct";
 import { UpdateProduct } from "./UpdateProduct";
 import { useAuth0 } from "@auth0/auth0-react";
