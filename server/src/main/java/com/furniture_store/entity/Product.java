@@ -1,6 +1,5 @@
 package com.furniture_store.entity;
 
-
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,6 +10,7 @@ import com.furniture_store.enums.FurnitureEnum.FurnitureSubType;
 import com.furniture_store.enums.FurnitureEnum.FurnitureType;
 import com.furniture_store.enums.FurnitureEnum.Material;
 import com.furniture_store.enums.FurnitureEnum.Room;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,7 +29,7 @@ public class Product {
     private String imgRef;
     // The dimensions of the product (ex. 48"W x 60"H x 34"D)
     private String dimensions;
-    //The name of the item
+    // The name of the item
     private String name;
     // A description of the item
     private String description;
@@ -37,7 +37,8 @@ public class Product {
     private Color color;
     // The style of the furniture (ex. modern, minimal, rustic)
     private FurnitureStyle style;
-    // Optional. The room this item might best suit (ex. if type="bed frame", room = "bedroom")
+    // Optional. The room this item might best suit (ex. if type="bed frame", room =
+    // "bedroom")
     private Room room;
     // The predominant material this item is made of
     private Material material;
@@ -49,7 +50,7 @@ public class Product {
     private BedSize size;
     // Optional. For bed frame with storage
     private boolean hasStorage;
-    // Optional. For items that come in a set (ex.  chairs, end tables)
+    // Optional. For items that come in a set (ex. chairs, end tables)
     private int numInSet;
     // Optional. For modular couches
     private int numOfPieces;

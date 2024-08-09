@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./addProductModal.css";
 import { ProductModal } from "./ProductModal";
 import apiURL from "../utils/api";
 
@@ -8,7 +7,7 @@ export const AddProduct = ({
   setOpen,
   setSuccessAlert,
   setErrorAlert,
-  accessToken
+  accessToken,
 }) => {
   const [dimensionsObj, setDimensionsObj] = useState({
     height: undefined,
@@ -42,28 +41,28 @@ export const AddProduct = ({
   const [newItem, setNewItem] = useState({ defaultNewItem });
 
   useEffect(() => {
-    if(imageUploaded){
-        console.log('starting fetch')
-    fetch(`${apiURL}/products/admin`, {
-      method: "POST",
-      headers:  new Headers({
-        Authorization: "Bearer " + accessToken,
-        "Content-Type": "application/json",
-    }),
-      body: JSON.stringify(newItem),
-    }).then((res) => {
-      if (res.status === 200) {
-        setSuccessAlert(true);
-        setTimeout(() => {
-          setSuccessAlert(false);
-        }, 1000);
-      } else {
-        setErrorAlert(true);
-        setTimeout(() => {
-          setErrorAlert(false);
-        }, 1000);
-      }
-    });
+    //waits for the image uplaod to first happen, then makes the fetch call to add the new item (with the image url)
+    if (imageUploaded) {
+      fetch(`${apiURL}/products/admin`, {
+        method: "POST",
+        headers: new Headers({
+          Authorization: "Bearer " + accessToken,
+          "Content-Type": "application/json",
+        }),
+        body: JSON.stringify(newItem),
+      }).then((res) => {
+        if (res.status === 200) {
+          setSuccessAlert(true);
+          setTimeout(() => {
+            setSuccessAlert(false);
+          }, 1000);
+        } else {
+          setErrorAlert(true);
+          setTimeout(() => {
+            setErrorAlert(false);
+          }, 1000);
+        }
+      });
 
       setDimensionsObj({
         height: undefined,
@@ -79,6 +78,7 @@ export const AddProduct = ({
   }, [imageUploaded]);
 
   const onSubmit = async (e) => {
+    //image upload fetch call
     if (image !== "") {
       const imageFormData = new FormData();
       imageFormData.append("file", image);

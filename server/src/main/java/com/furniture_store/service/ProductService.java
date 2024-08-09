@@ -15,14 +15,14 @@ public interface ProductService {
     ProductDTO getOneProduct(String id);
 
     // Add new product
-        // Auth Protected
+    // Auth Protected
     void saveNewProduct(ProductDTO productDTO);
 
     // update product
-        // Auth protected
+    // Auth protected
     ProductDTO updateProduct(String id, ProductDTO productDTO);
 
     // Delete Product
-        // Auth Protected
+    // Auth Protected
     void deleteProduct(String id);
 }

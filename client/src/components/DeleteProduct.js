@@ -19,9 +19,9 @@ export const DeleteProduct = ({
     handleDeleteClose();
     fetch(`${apiURL}/products/admin/${currId}`, {
       method: "DELETE",
-      headers:  new Headers({
+      headers: new Headers({
         Authorization: "Bearer " + accessToken,
-          "Content-Type": "application/json",
+        "Content-Type": "application/json",
       }),
     }).then((res) => {
       if (res.status === 200) {

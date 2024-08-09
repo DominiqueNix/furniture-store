@@ -11,7 +11,6 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import "./cart.css";
 import QuantityInput from "./MUINumberStepper";
 import Nav from "./Nav";
 import { useNavigate } from "react-router-dom";
@@ -173,16 +172,12 @@ export const Cart = ({
                 </Typography>
                 <Typography>Card Information</Typography>
                 <TextField
-                  // sx={{margin: '10px 0'}}
                   placeholder="1234 1234 1234 1234"
-                  // label="Card Number"
                   fullWidth
                 />
                 <Box sx={{ display: "flex", marginBottom: "20px" }}>
                   <TextField
-                    // sx={{margin: '10px 0'}}
                     placeholder="MM/YY"
-                    // label="Expire Date"
                     fullWidth
                   />
                   <TextField fullWidth placeholder="CVC" />

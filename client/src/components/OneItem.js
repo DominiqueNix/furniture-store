@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Nav from "./Nav";
 import { utils } from "../utils/utils";
-import "./oneItem.css";
 import apiURL from "../utils/api";
 
 export const OneItem = ({ setItemAddedToCart, itemAddedToCart }) => {

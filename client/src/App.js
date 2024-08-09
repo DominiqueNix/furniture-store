@@ -13,10 +13,10 @@ import { Contact } from "./components/Contact";
 
 function App() {
   const [items, setItems] = useState([]);
-  const [filteredItems, setFilteredItems] = useState([])
+  const [filteredItems, setFilteredItems] = useState([]);
   const [successAlert, setSuccessAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
-  const [itemAddedToCart, setItemAddedToCart] = useState(false)
+  const [itemAddedToCart, setItemAddedToCart] = useState(false);
   const [totalPayment, setTotalPayment] = useState(0);
 
   const fetchItems = () => {
@@ -24,7 +24,7 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         setItems(data);
-        setFilteredItems(data)
+        setFilteredItems(data);
       });
   };
 
@@ -35,8 +35,27 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Landing popularItems={items.slice(0,4)} setItemAddedToCart={setItemAddedToCart}/>} />
-        <Route path="/items" element={<AllItems items={items} filteredItems={filteredItems} setFilteredItems={setFilteredItems} setItemAddedToCart={setItemAddedToCart} itemAddedToCart={itemAddedToCart}/>} />
+        <Route
+          path="/"
+          element={
+            <Landing
+              popularItems={items.slice(0, 4)}
+              setItemAddedToCart={setItemAddedToCart}
+            />
+          }
+        />
+        <Route
+          path="/items"
+          element={
+            <AllItems
+              items={items}
+              filteredItems={filteredItems}
+              setFilteredItems={setFilteredItems}
+              setItemAddedToCart={setItemAddedToCart}
+              itemAddedToCart={itemAddedToCart}
+            />
+          }
+        />
         <Route
           path="/admin"
           element={
@@ -49,10 +68,31 @@ function App() {
             />
           }
         />
-        <Route path="/items/:itemId" element={<OneItem setItemAddedToCart={setItemAddedToCart} itemAddedToCart={itemAddedToCart}/>} />
-        <Route path="/cart" element={<Cart setItemAddedToCart={setItemAddedToCart} itemAddedToCart={itemAddedToCart} totalPayment={totalPayment} setTotalPayment={setTotalPayment}/>}/>
-        <Route path="/checkout-success" element={<CheckoutSucceess total={totalPayment}/>}/>
-        <Route path="/contact" element={<Contact />}/>
+        <Route
+          path="/items/:itemId"
+          element={
+            <OneItem
+              setItemAddedToCart={setItemAddedToCart}
+              itemAddedToCart={itemAddedToCart}
+            />
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <Cart
+              setItemAddedToCart={setItemAddedToCart}
+              itemAddedToCart={itemAddedToCart}
+              totalPayment={totalPayment}
+              setTotalPayment={setTotalPayment}
+            />
+          }
+        />
+        <Route
+          path="/checkout-success"
+          element={<CheckoutSucceess total={totalPayment} />}
+        />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </BrowserRouter>
   );

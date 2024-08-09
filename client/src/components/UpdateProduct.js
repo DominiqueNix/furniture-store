@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./addProductModal.css";
 import { ProductModal } from "./ProductModal";
 import apiURL from "../utils/api";
 
@@ -8,7 +7,7 @@ export const UpdateProduct = ({
   setOpen,
   setSuccessAlert,
   setErrorAlert,
-  item, 
+  item,
   accessToken,
 }) => {
   const [dimensionsObj, setDimensionsObj] = useState({
@@ -38,10 +37,10 @@ export const UpdateProduct = ({
     if (imageUploaded) {
       fetch(`${apiURL}/products/admin/${item.col1}`, {
         method: "PUT",
-        headers:  new Headers({
-        Authorization: "Bearer " + accessToken,
+        headers: new Headers({
+          Authorization: "Bearer " + accessToken,
           "Content-Type": "application/json",
-      }),
+        }),
         body: JSON.stringify(newItem),
       }).then((res) => {
         if (res.status === 200) {

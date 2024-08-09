@@ -14,7 +14,6 @@ import { Fragment } from "react";
 import { styled } from "@mui/material/styles";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import InputAdornment from "@mui/material/InputAdornment";
-import "./addProductModal.css";
 import { utils } from "../utils/utils";
 
 export const ProductModal = ({
